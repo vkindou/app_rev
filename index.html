@@ -131,10 +131,25 @@
     border-radius:100px;
     transition:width .3s;
   }
-  .goal-caption{
+  .goal-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
     margin-top:5px;
+  }
+  .goal-caption{font-size:11px; color:var(--text-dim);}
+  .goal-steppers{display:flex; align-items:center; gap:4px;}
+  .goal-step-btn{
+    appearance:none;
+    border:1px solid var(--border);
+    background:var(--surface-2);
+    color:var(--text);
+    width:18px; height:18px;
+    border-radius:5px;
     font-size:11px;
-    color:var(--text-dim);
+    line-height:1;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
   }
 
   /* ---- SETUP SCREEN ---- */
@@ -207,6 +222,20 @@
     color:var(--accent-ink);
     border-color:var(--accent);
   }
+
+  .theme-row{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+  }
+  .theme-swatch{
+    width:32px; height:32px;
+    border-radius:50%;
+    border:2px solid transparent;
+    cursor:pointer;
+    padding:0;
+  }
+  .theme-swatch[aria-pressed="true"]{border-color:var(--text);}
 
   .start-btn{
     appearance:none;
@@ -391,6 +420,38 @@
   .opt.wrong .letter{background:var(--danger); color:#0b0d0a;}
   .opt:disabled{cursor:default;}
 
+  .write-row{display:flex; gap:8px;}
+  .write-input{
+    flex:1;
+    border:1.5px solid var(--border);
+    background:var(--surface-2);
+    color:var(--text);
+    border-radius:14px;
+    padding:13px 14px;
+    font-family:inherit;
+    font-size:14.5px;
+  }
+  .write-input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  .write-input.correct{border-color:var(--good);}
+  .write-input.wrong{border-color:var(--danger);}
+  .write-submit{
+    flex:none;
+    appearance:none;
+    border:none;
+    background:var(--accent);
+    color:var(--accent-ink);
+    border-radius:14px;
+    padding:0 18px;
+    font-family:"Bebas Neue", sans-serif;
+    font-size:16px;
+    cursor:pointer;
+  }
+  .write-answer{
+    margin-top:10px;
+    font-size:13px;
+  }
+  .write-answer b{color:var(--good);}
+
   .explain{
     margin-top:12px;
     font-size:13px;
@@ -566,7 +627,13 @@
         <div class="label">Série de jours</div>
         <div class="streak-line" id="streakLine">Commence aujourd'hui</div>
         <div class="goal-track"><div class="goal-fill" id="goalFill" style="width:0%"></div></div>
-        <div class="goal-caption" id="goalCaption">0 / 50 questions cette semaine</div>
+        <div class="goal-row">
+          <div class="goal-caption" id="goalCaption">0 / 50 questions cette semaine</div>
+          <div class="goal-steppers">
+            <button class="goal-step-btn" id="goalMinus" type="button">−</button>
+            <button class="goal-step-btn" id="goalPlus" type="button">+</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -578,6 +645,8 @@
     <div class="card" style="margin-top:14px;">
       <div class="label">Durée du repos</div>
       <div class="durations" id="durationGrid"></div>
+      <div class="label" style="margin-top:16px;">Couleur</div>
+      <div class="theme-row" id="themeRow"></div>
     </div>
 
     <button class="start-btn" id="startBtn" style="margin-top:14px;">
@@ -622,6 +691,11 @@
         </div>
         <h2 id="qText">Question</h2>
         <div class="options" id="qOptions"></div>
+        <div class="write-row" id="qWrite" hidden>
+          <input class="write-input" id="writeInput" type="text" placeholder="Ta réponse" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <button class="write-submit" id="writeSubmit" type="button">OK</button>
+        </div>
+        <div class="write-answer" id="writeAnswer" hidden></div>
         <div class="explain" id="qExplain" hidden></div>
       </div>
     </div>
@@ -679,7 +753,14 @@
       {q:"Un flux monétaire correspond à...", o:["Un échange d'argent (paiement, salaire, crédit)","La livraison d'un produit","Une prestation de service","Le travail fourni par un salarié"], a:0},
       {q:"France Travail appartient à quelle catégorie d'agent ?", o:["Entreprise","Ménage","Administration publique","Banque"], a:2},
       {q:"Le type de production d'une administration publique est...", o:["Marchande","Non marchande","Mixte","Industrielle"], a:1},
-      {q:"Qui verse les cotisations sociales à l'URSSAF ?", o:["Les banques","Les ménages seuls","Les entreprises (employeurs)","L'État uniquement"], a:2}
+      {q:"Qui verse les cotisations sociales à l'URSSAF ?", o:["Les banques","Les ménages seuls","Les entreprises (employeurs)","L'État uniquement"], a:2},
+      {q:"Quel agent économique produit principalement des services non marchands financés par l'impôt ?", o:["Les banques","Les administrations publiques","Les ménages","Les entreprises"], a:1},
+      {q:"Le salaire versé par une entreprise à un salarié est un flux...", o:["Réel","Monétaire","Mixte","Aucun des deux"], a:1},
+      {q:"Un entrepreneur individuel appartient à quel agent économique ?", o:["Entreprise uniquement","Administration publique","Ménage","Banque"], a:2, e:"Au sens de la comptabilité nationale, les entrepreneurs individuels sont rattachés aux ménages."},
+      {q:"Une cotisation sociale payée par un salarié finance notamment...", o:["Les dividendes des actionnaires","La protection sociale (santé, retraite)","Le capital de l'entreprise","La publicité de l'entreprise"], a:1},
+      {q:"Le rôle premier d'une banque commerciale est de...", o:["Fixer les prix du marché","Collecter l'épargne et accorder des crédits","Produire des biens de consommation","Voter les lois économiques"], a:1},
+      {q:"Quel type de production correspond à la fourniture de biens et services à but non lucratif ?", o:["Production marchande", "Production non marchande", "Production mixte", "Production industrielle"], a:1, type:"write", answers:["production non marchande","non marchande"]},
+      {q:"Comment s'appelle l'agent économique qui consomme des biens et services pour satisfaire ses besoins ?", type:"write", answers:["menage","menages","les menages"]}
     ]},
     cejm2: { label:"CEJM · Marchés", short:"CEJM Marchés", items:[
       {q:"Combien de types de marché existe-t-il traditionnellement ?", o:["2","3","4","5"], a:1, e:"Marché des biens/services, marché du travail, marché financier."},
@@ -691,7 +772,13 @@
       {q:"Une barrière à l'entrée peut être...", o:["Uniquement géographique","Financière, réglementaire ou technologique","Toujours illégale","Fixée par les syndicats"], a:1},
       {q:"Une externalité négative est...", o:["Un bénéfice partagé","Un effet néfaste subi par un tiers sans compensation","Une aide de l'État","Une hausse de prix"], a:1, e:"Exemple : la pollution générée par une usine."},
       {q:"L'asymétrie d'information désigne...", o:["Un prix trop élevé","Un agent qui en sait plus qu'un autre sur le marché","Une absence de concurrence","Un marché saturé"], a:1},
-      {q:"Une entente sur les prix entre concurrents est...", o:["Encouragée","Interdite","Obligatoire","Sans conséquence"], a:1}
+      {q:"Une entente sur les prix entre concurrents est...", o:["Encouragée","Interdite","Obligatoire","Sans conséquence"], a:1},
+      {q:"Sur le marché des biens et services, les offreurs sont...", o:["Les ménages","Les entreprises","L'État uniquement","Les banques"], a:1},
+      {q:"Sur le marché des biens et services, les demandeurs sont...", o:["Les entreprises","Les banques","Les ménages (consommateurs)","Les administrations seules"], a:2},
+      {q:"Une hausse de la demande sans hausse de l'offre entraîne généralement...", o:["Une baisse des prix","Une hausse des prix","Aucun effet","La disparition du marché"], a:1},
+      {q:"Le rôle de l'ARCEP dans le marché de la téléphonie est de...", o:["Fixer les prix des forfaits","Réguler la concurrence et attribuer les licences","Vendre des abonnements","Interdire la concurrence"], a:1},
+      {q:"Un monopole se caractérise par...", o:["De nombreux offreurs","Un seul offreur sur le marché","Aucun demandeur","Des prix toujours bas"], a:1},
+      {q:"Comment appelle-t-on le lieu (réel ou fictif) de rencontre entre l'offre et la demande ?", type:"write", answers:["marche","le marche","un marche"]}
     ]},
     rcmkt: { label:"RC · Marché & Marketing", short:"RC Marketing", items:[
       {q:"Que signifie le modèle PESTEL ?", o:["Prix, Étude, Stock, Tarif, Emplacement, Livraison","Politique, Économique, Socioculturel, Technologique, Écologique, Légal","Produit, Enseigne, Stratégie, Test, Écoute, Logistique","Plan, Étape, Suivi, Test, Évaluation, Lancement"], a:1},
@@ -704,7 +791,14 @@
       {q:"La profondeur d'une gamme correspond à...", o:["Le nombre de lignes de produits","Le nombre de références dans une ligne","Le nombre de concurrents","La taille de l'entreprise"], a:1},
       {q:"Une marque doit juridiquement être...", o:["Chère et complexe","Disponible, licite, non déceptive, non générique","Identique à celle d'un concurrent","Courte uniquement"], a:1},
       {q:"Le earned media désigne...", o:["Les publicités payantes","Le site web de l'entreprise","La communication gratuite générée par les clients (avis, réseaux sociaux)","Les panneaux publicitaires"], a:2},
-      {q:"Le owned media désigne...", o:["Les supports possédés par l'entreprise (site, appli)","Les publications de journalistes","Les avis clients spontanés","La publicité télévisée"], a:0}
+      {q:"Le owned media désigne...", o:["Les supports possédés par l'entreprise (site, appli)","Les publications de journalistes","Les avis clients spontanés","La publicité télévisée"], a:0},
+      {q:"Le ciblage consiste à...", o:["Étudier la concurrence","Choisir le ou les segments de marché à viser","Fixer le prix de vente","Créer le logo de la marque"], a:1},
+      {q:"Le positionnement d'un produit vise à...", o:["Réduire les coûts de production","Occuper une place distincte et attractive dans l'esprit du client","Augmenter le nombre de fournisseurs","Supprimer la concurrence"], a:1},
+      {q:"Une stratégie de prix de pénétration consiste à...", o:["Fixer un prix élevé dès le lancement","Fixer un prix bas pour gagner rapidement des parts de marché","Ne jamais changer de prix","Vendre uniquement en B to B"], a:1},
+      {q:"La segmentation consiste à...", o:["Vendre à tout le monde de la même façon","Diviser le marché en groupes homogènes de consommateurs","Fixer un seul prix pour tous","Choisir un seul canal de vente"], a:1},
+      {q:"Le cycle de vie d'un produit comporte les phases...", o:["Achat, usage, satisfaction, fidélité","Lancement, croissance, maturité, déclin","Prospection, vente, SAV","Segmentation, ciblage, positionnement"], a:1},
+      {q:"Quel sigle désigne l'analyse Forces, Faiblesses, Opportunités, Menaces ?", type:"write", answers:["swot"]},
+      {q:"Quel terme désigne la stratégie consistant à fixer un prix élevé pour une clientèle premium ?", type:"write", answers:["ecremage","strategie d'ecremage","strategie d ecremage"]}
     ]},
     rcstat: { label:"RC · Statistiques", short:"RC Stats", items:[
       {q:"La médiane est...", o:["La moyenne arithmétique","La valeur qui partage la série en deux parties égales","La valeur la plus fréquente","L'écart entre le min et le max"], a:1},
@@ -712,7 +806,10 @@
       {q:"Quelle est la formule du taux de croissance ?", o:["(Arrivée - Départ) / Départ x 100","Arrivée / Départ","Départ - Arrivée","(Arrivée + Départ) / 2"], a:0},
       {q:"La méthode de Mayer sert à...", o:["Calculer un écart-type","Établir une droite d'ajustement pour prévoir les ventes","Calculer une part de marché","Segmenter la clientèle"], a:1},
       {q:"Dans la méthode de Mayer, on divise la série en...", o:["Trois groupes","Deux groupes égaux (ou presque)","Cinq groupes","Un seul groupe"], a:1},
-      {q:"Le mode d'une série statistique est...", o:["La valeur la plus fréquente","La valeur centrale","La moyenne pondérée","L'écart-type"], a:0}
+      {q:"Le mode d'une série statistique est...", o:["La valeur la plus fréquente","La valeur centrale","La moyenne pondérée","L'écart-type"], a:0},
+      {q:"Un tableau statistique avec effectifs cumulés sert à...", o:["Calculer facilement la médiane et les quartiles","Remplacer la moyenne","Éviter de faire des graphiques","Calculer le taux de TVA"], a:0},
+      {q:"Si l'écart-type est faible, les valeurs de la série sont...", o:["Très dispersées","Proches de la moyenne","Toutes négatives","Impossibles à représenter"], a:1},
+      {q:"La méthode des moindres carrés sert à...", o:["Arrondir les résultats","Trouver la droite d'ajustement la plus précise possible","Calculer un pourcentage de remise","Faire un diagramme circulaire"], a:1}
     ]},
     rcdigi: { label:"RC · Digital & CRM", short:"RC Digital", items:[
       {q:"Le multicanal désigne...", o:["Un seul canal de vente","Plusieurs canaux qui fonctionnent de façon indépendante","Des canaux totalement intégrés","Une vente uniquement en magasin"], a:1},
@@ -722,7 +819,11 @@
       {q:"Que signifie GRC ?", o:["Gestion des Ressources Commerciales","Gestion de la Relation Client","Groupe de Recherche Client","Gestion des Résultats Commerciaux"], a:1},
       {q:"Un logiciel de phoning sert notamment à...", o:["Créer des factures","Automatiser les appels et gérer les campagnes de prospection téléphonique","Gérer les stocks","Concevoir des visuels publicitaires"], a:1},
       {q:"Un centre de relation client (CRC) peut être...", o:["Uniquement interne","Uniquement externe","Interne ou externe (sous-traité)","Toujours gratuit"], a:2},
-      {q:"Le traitement d'une base de données clients permet de...", o:["Segmenter, cibler et personnaliser la relation client","Supprimer les données inutiles uniquement","Remplacer le CRM","Fixer les prix de vente"], a:0}
+      {q:"Le traitement d'une base de données clients permet de...", o:["Segmenter, cibler et personnaliser la relation client","Supprimer les données inutiles uniquement","Remplacer le CRM","Fixer les prix de vente"], a:0},
+      {q:"Un web-to-store désigne...", o:["Un achat en ligne livré en magasin","Une recherche en ligne suivie d'un achat en magasin","Une vente uniquement physique","Un service après-vente en ligne"], a:1},
+      {q:"Le ROPO (Research Online, Purchase Offline) désigne...", o:["Acheter en ligne puis retourner en magasin","Se renseigner en ligne puis acheter en magasin","Payer en ligne uniquement","Livrer uniquement à domicile"], a:1},
+      {q:"Un logiciel de phoning permet notamment de...", o:["Programmer des scripts d'appels et suivre les campagnes","Gérer la paie des salariés","Créer des factures clients","Fixer les objectifs annuels"], a:0},
+      {q:"Quel sigle désigne la Gestion de la Relation Client ?", type:"write", answers:["grc"]}
     ]},
     rcdist: { label:"RC · Distribution", short:"RC Distribution", items:[
       {q:"Un circuit direct signifie...", o:["Le producteur vend directement au client final, sans intermédiaire","Il y a un seul intermédiaire","Il y a plusieurs intermédiaires","La vente passe par un grossiste"], a:0},
@@ -731,7 +832,10 @@
       {q:"Une franchise repose sur...", o:["Le rachat total de l'enseigne","Une marque et un savoir-faire cédés contre des redevances","Un contrat sans obligation","La gratuité totale"], a:1},
       {q:"Une concession accorde à un distributeur...", o:["L'exclusivité de distribution sur un territoire donné","La propriété de la marque","Un statut de salarié","Aucun droit particulier"], a:0},
       {q:"Une centrale d'achat sert à...", o:["Vendre directement aux clients finaux","Regrouper les achats de plusieurs points de vente pour négocier de meilleurs prix","Remplacer les fournisseurs","Gérer uniquement la publicité"], a:1},
-      {q:"Un réseau intégré (comme Carrefour) est composé de...", o:["Commerçants indépendants sous contrat","Points de vente appartenant à un même groupe","Franchisés uniquement","Fournisseurs externes"], a:1}
+      {q:"Un réseau intégré (comme Carrefour) est composé de...", o:["Commerçants indépendants sous contrat","Points de vente appartenant à un même groupe","Franchisés uniquement","Fournisseurs externes"], a:1},
+      {q:"Un contrat de concession lie un...", o:["Franchiseur et un franchisé","Concédant et un concessionnaire","Grossiste et un détaillant","Salarié et un employeur"], a:1},
+      {q:"La distribution intensive vise à...", o:["Être présent dans un minimum de points de vente","Être présent dans un maximum de points de vente","N'avoir qu'un seul revendeur","Vendre uniquement en ligne"], a:1},
+      {q:"La distribution sélective consiste à...", o:["Vendre partout sans condition","Choisir des distributeurs selon des critères précis (image, compétence)","Interdire toute revente","Vendre uniquement à l'export"], a:1}
     ]},
     angverb: { label:"Anglais · Verbes irr.", short:"Anglais", items:[
       {q:"Quel est le prétérit (passé simple) de \"go\" ?", o:["Goed","Went","Gone","Going"], a:1, e:"go / went / gone."},
@@ -750,7 +854,13 @@
       {q:"Quel est le prétérit de \"know\" ?", o:["Knew","Known","Knowed","Knows"], a:0, e:"know / knew / known."},
       {q:"Quel est le prétérit de \"think\" ?", o:["Thinked","Thought","Thinking","Thoughted"], a:1, e:"think / thought / thought."},
       {q:"Quel est le participe passé de \"break\" ?", o:["Broke","Broken","Breaked","Breaking"], a:1, e:"break / broke / broken."},
-      {q:"Quel est le participe passé de \"choose\" ?", o:["Chose","Chosen","Choosed","Choosing"], a:1, e:"choose / chose / chosen."}
+      {q:"Quel est le participe passé de \"choose\" ?", o:["Chose","Chosen","Choosed","Choosing"], a:1, e:"choose / chose / chosen."},
+      {q:"Quel est le prétérit de \"buy\" ?", o:["Buyed","Bought","Buy","Buying"], a:1, e:"buy / bought / bought."},
+      {q:"Quel est le prétérit de \"run\" ?", o:["Ran","Runned","Run","Running"], a:0, e:"run / ran / run."},
+      {q:"Quel est le prétérit de \"sell\" ?", o:["Selled","Sold","Sell","Selling"], a:1, e:"sell / sold / sold."},
+      {q:"Quel est le prétérit de \"find\" ?", o:["Finded","Found","Find","Finding"], a:1, e:"find / found / found."},
+      {q:"Écris le prétérit du verbe \"feel\" (ressentir).", type:"write", answers:["felt"]},
+      {q:"Écris le prétérit du verbe \"buy\" (acheter).", type:"write", answers:["bought"]}
     ]}
   };
 
@@ -762,7 +872,12 @@
   order.forEach(function(key){
     BANK[key].items.forEach(function(item, idx){
       var id = key + "_" + idx;
-      var flat = {id:id, subjectKey:key, subject:BANK[key].short, q:item.q, o:item.o, a:item.a, e:item.e || ""};
+      var flat = {
+        id:id, subjectKey:key, subject:BANK[key].short,
+        type: item.type || "mcq",
+        q:item.q, o:item.o, a:item.a, e:item.e || "",
+        answers: item.answers || []
+      };
       ALL_ITEMS.push(flat);
       ITEM_BY_ID[id] = flat;
     });
@@ -770,12 +885,24 @@
 
   var DAY_MS = 24*60*60*1000;
   var BOX_INTERVAL_DAYS = [0, 1, 2, 4, 8, 16]; // index = box (1..5), box 0 unused
-  var WEEKLY_GOAL = 50;
   var BADGE_TIERS = [
     {min:50, medal:"🥇", name:"Or"},
     {min:25, medal:"🥈", name:"Argent"},
     {min:10, medal:"🥉", name:"Bronze"}
   ];
+  var THEMES = [
+    {id:"lime", light:"#7a8f00", dark:"#d4ff3f"},
+    {id:"orange", light:"#c1601a", dark:"#ff9d42"},
+    {id:"blue", light:"#1f5fa8", dark:"#5eb3ff"},
+    {id:"pink", light:"#b0326b", dark:"#ff8fc4"}
+  ];
+
+  function normalize(s){
+    return (s || "").toString().toLowerCase()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[’']/g, "'")
+      .trim().replace(/\s+/g, " ");
+  }
 
   // ---------- Storage helpers ----------
   function loadJSON(key, fallback){
@@ -791,23 +918,96 @@
 
   var store = loadJSON("gymrevise_v1", {total:0, correct:0, days:{}, subjCorrect:{}});
   if(!store.subjCorrect) store.subjCorrect = {};
-  var srs = loadJSON("gymrevise_srs_v1", {}); // id -> {box, due, wrong, seen}
-  var history = loadJSON("gymrevise_history_v1", []); // [{ts,date,duration,subjects,answered,correct}]
+  var srs = loadJSON("gymrevise_srs_v1", {});
+  var history = loadJSON("gymrevise_history_v1", []);
+  var prefs = loadJSON("gymrevise_prefs_v1", {subjects:null, duration:180, theme:"lime", goal:50});
+  if(!prefs.goal) prefs.goal = 50;
+  if(!prefs.theme) prefs.theme = "lime";
 
   function saveStore(){ saveJSON("gymrevise_v1", store); }
   function saveSrs(){ saveJSON("gymrevise_srs_v1", srs); }
   function saveHistory(){ saveJSON("gymrevise_history_v1", history); }
+  function savePrefs(){ saveJSON("gymrevise_prefs_v1", prefs); }
 
   function todayKey(d){
     d = d || new Date();
     return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
   }
 
+  // ---------- Theme ----------
+  function applyTheme(id){
+    var t = THEMES.filter(function(x){ return x.id === id; })[0] || THEMES[0];
+    document.documentElement.style.setProperty("--accent-light-override", t.light);
+    var styleTag = document.getElementById("themeOverride");
+    if(!styleTag){
+      styleTag = document.createElement("style");
+      styleTag.id = "themeOverride";
+      document.head.appendChild(styleTag);
+    }
+    styleTag.textContent =
+      ":root{--accent:" + t.light + ";}" +
+      "@media (prefers-color-scheme: dark){:root:not([data-theme=\"light\"]){--accent:" + t.dark + ";}}" +
+      ":root[data-theme=\"dark\"]{--accent:" + t.dark + ";}";
+  }
+  applyTheme(prefs.theme);
+
+  var themeRow = document.getElementById("themeRow");
+  var themeSwatchEls = {};
+  THEMES.forEach(function(t){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "theme-swatch";
+    b.style.background = t.light;
+    b.setAttribute("aria-pressed", t.id === prefs.theme ? "true" : "false");
+    b.addEventListener("click", function(){
+      prefs.theme = t.id;
+      savePrefs();
+      applyTheme(t.id);
+      Object.keys(themeSwatchEls).forEach(function(k){
+        themeSwatchEls[k].setAttribute("aria-pressed", k === t.id ? "true" : "false");
+      });
+    });
+    themeSwatchEls[t.id] = b;
+    themeRow.appendChild(b);
+  });
+
+  // ---------- Sound & vibration ----------
+  var audioCtx = null;
+  function ensureAudio(){
+    if(audioCtx) return audioCtx;
+    try{
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if(Ctx) audioCtx = new Ctx();
+    }catch(e){}
+    return audioCtx;
+  }
+  function playEndSound(){
+    try{
+      var ctx = ensureAudio();
+      if(!ctx) return;
+      if(ctx.state === "suspended"){ ctx.resume(); }
+      [0, 0.16].forEach(function(delay){
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = 880;
+        gain.gain.setValueAtTime(0.0001, ctx.currentTime + delay);
+        gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + delay + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + delay + 0.22);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + 0.24);
+      });
+    }catch(e){}
+  }
+  function vibrateEnd(){
+    try{ if(navigator.vibrate) navigator.vibrate([180, 90, 180]); }catch(e){}
+  }
+
   // ---------- Streak & weekly goal ----------
   function computeStreak(){
     var streak = 0;
     var d = new Date();
-    // if nothing done today yet, streak still counts previous consecutive days
     if(!store.days[todayKey(d)]) d = new Date(d.getTime() - DAY_MS);
     while(store.days[todayKey(d)]){
       streak++;
@@ -832,10 +1032,21 @@
       ? (streak === 1 ? "1 jour d'affilée 🔥" : streak + " jours d'affilée 🔥")
       : "Commence aujourd'hui";
     var weekly = computeWeeklyCount();
-    var pct = Math.min(100, Math.round(100*weekly/WEEKLY_GOAL));
+    var pct = Math.min(100, Math.round(100*weekly/prefs.goal));
     document.getElementById("goalFill").style.width = pct + "%";
-    document.getElementById("goalCaption").textContent = weekly + " / " + WEEKLY_GOAL + " questions cette semaine";
+    document.getElementById("goalCaption").textContent = weekly + " / " + prefs.goal + " questions cette semaine";
   }
+
+  document.getElementById("goalMinus").addEventListener("click", function(){
+    prefs.goal = Math.max(10, prefs.goal - 10);
+    savePrefs();
+    renderStreak();
+  });
+  document.getElementById("goalPlus").addEventListener("click", function(){
+    prefs.goal = Math.min(300, prefs.goal + 10);
+    savePrefs();
+    renderStreak();
+  });
 
   function renderStats(){
     var tk = todayKey();
@@ -863,7 +1074,7 @@
     } else {
       s.wrong = (s.wrong||0) + 1;
       s.box = 1;
-      s.due = Date.now(); // resurfaces almost immediately
+      s.due = Date.now();
     }
     srs[id] = s;
     saveSrs();
@@ -879,25 +1090,31 @@
 
   // ---------- Setup screen state ----------
   var selectedSubjects = {};
-  order.forEach(function(k){ selectedSubjects[k] = true; });
-  var duration = 180; // seconds
+  order.forEach(function(k){
+    selectedSubjects[k] = prefs.subjects ? (prefs.subjects.indexOf(k) !== -1) : true;
+  });
+  var duration = prefs.duration || 180;
 
   var subjectGrid = document.getElementById("subjectGrid");
   var chipDueEls = {};
+  var chipEls = {};
   order.forEach(function(key){
     var btn = document.createElement("button");
     btn.className = "chip";
     btn.type = "button";
-    btn.setAttribute("aria-pressed", "true");
+    btn.setAttribute("aria-pressed", selectedSubjects[key] ? "true" : "false");
     var dueSpan = document.createElement("span");
     dueSpan.className = "due-badge";
     dueSpan.hidden = true;
     btn.innerHTML = '<span class="dot"></span><span>' + BANK[key].label + '</span>';
     btn.appendChild(dueSpan);
     chipDueEls[key] = dueSpan;
+    chipEls[key] = btn;
     btn.addEventListener("click", function(){
       selectedSubjects[key] = !selectedSubjects[key];
       btn.setAttribute("aria-pressed", selectedSubjects[key] ? "true" : "false");
+      prefs.subjects = order.filter(function(k){ return selectedSubjects[k]; });
+      savePrefs();
       updateStartState();
     });
     subjectGrid.appendChild(btn);
@@ -918,9 +1135,11 @@
     btn.className = "dur-btn";
     btn.type = "button";
     btn.textContent = pair[0];
-    btn.setAttribute("aria-pressed", pair[1] === 180 ? "true" : "false");
+    btn.setAttribute("aria-pressed", pair[1] === duration ? "true" : "false");
     btn.addEventListener("click", function(){
       duration = pair[1];
+      prefs.duration = duration;
+      savePrefs();
       Array.prototype.forEach.call(durationGrid.children, function(c){ c.setAttribute("aria-pressed","false"); });
       btn.setAttribute("aria-pressed","true");
     });
@@ -950,7 +1169,6 @@
       }
       return arr;
     }
-    // priority: lower box (more urgent) first among due items
     due.sort(function(a,b){ return getSrs(a.id).box - getSrs(b.id).box; });
     shuffle(rest);
     return due.concat(rest);
@@ -980,11 +1198,16 @@
   var qNewTagEl = document.getElementById("qNewTag");
   var qTextEl = document.getElementById("qText");
   var qOptionsEl = document.getElementById("qOptions");
+  var qWriteEl = document.getElementById("qWrite");
+  var writeInputEl = document.getElementById("writeInput");
+  var writeSubmitEl = document.getElementById("writeSubmit");
+  var writeAnswerEl = document.getElementById("writeAnswer");
   var qExplainEl = document.getElementById("qExplain");
 
   var runTimer = null, endsAt = 0, totalDuration = 180;
   var pool = [], poolIdx = 0, answered = 0, correctCount = 0, advanceTimeout = null;
   var sessionSubjects = [];
+  var currentItem = null, locked = false;
 
   function fmtTime(s){
     var m = Math.floor(s/60), sec = s%60;
@@ -1006,32 +1229,42 @@
     if(poolIdx >= pool.length){ pool = buildPool(); poolIdx = 0; }
     if(!pool.length) return;
     var item = pool[poolIdx++];
+    currentItem = item;
+    locked = false;
     qTagEl.textContent = item.subject;
     var s = getSrs(item.id);
     qNewTagEl.hidden = !(s.seen > 0 && s.box <= 2);
     qTextEl.textContent = item.q;
     qExplainEl.hidden = true;
     qExplainEl.textContent = item.e;
-    qOptionsEl.innerHTML = "";
-    var letters = ["A","B","C","D"];
-    item.o.forEach(function(optText, idx){
-      var b = document.createElement("button");
-      b.className = "opt";
-      b.type = "button";
-      b.innerHTML = '<span class="letter">'+letters[idx]+'</span><span>'+optText+'</span>';
-      b.addEventListener("click", function(){ chooseAnswer(item, idx, b); });
-      qOptionsEl.appendChild(b);
-    });
+    writeAnswerEl.hidden = true;
+
+    if(item.type === "write"){
+      qOptionsEl.hidden = true;
+      qOptionsEl.innerHTML = "";
+      qWriteEl.hidden = false;
+      writeInputEl.value = "";
+      writeInputEl.classList.remove("correct","wrong");
+      writeInputEl.disabled = false;
+      writeSubmitEl.disabled = false;
+      setTimeout(function(){ writeInputEl.focus(); }, 50);
+    } else {
+      qWriteEl.hidden = true;
+      qOptionsEl.hidden = false;
+      qOptionsEl.innerHTML = "";
+      var letters = ["A","B","C","D"];
+      item.o.forEach(function(optText, idx){
+        var b = document.createElement("button");
+        b.className = "opt";
+        b.type = "button";
+        b.innerHTML = '<span class="letter">'+letters[idx]+'</span><span>'+optText+'</span>';
+        b.addEventListener("click", function(){ chooseAnswer(item, idx, b); });
+        qOptionsEl.appendChild(b);
+      });
+    }
   }
 
-  function chooseAnswer(item, idx, btnEl){
-    if(qOptionsEl.getAttribute("data-locked") === "1") return;
-    qOptionsEl.setAttribute("data-locked","1");
-    var opts = qOptionsEl.querySelectorAll(".opt");
-    opts.forEach(function(o){ o.disabled = true; });
-    opts[item.a].classList.add("correct");
-    var isCorrect = idx === item.a;
-    if(!isCorrect){ btnEl.classList.add("wrong"); }
+  function recordAnswer(item, isCorrect){
     answered++;
     if(isCorrect) correctCount++;
     scoreRunEl.textContent = correctCount + " / " + answered;
@@ -1044,15 +1277,51 @@
     saveStore();
     updateSrsAnswer(item.id, isCorrect);
     if(sessionSubjects.indexOf(item.subject) === -1) sessionSubjects.push(item.subject);
-
-    if(item.e){ qExplainEl.hidden = false; }
-    advanceTimeout = setTimeout(function(){
-      qOptionsEl.removeAttribute("data-locked");
-      if(Date.now() < endsAt){ nextQuestion(); }
-    }, item.e ? 1900 : 1100);
   }
 
+  function scheduleAdvance(hasExplain){
+    advanceTimeout = setTimeout(function(){
+      if(Date.now() < endsAt){ nextQuestion(); }
+    }, hasExplain ? 1900 : 1100);
+  }
+
+  function chooseAnswer(item, idx, btnEl){
+    if(locked) return;
+    locked = true;
+    var opts = qOptionsEl.querySelectorAll(".opt");
+    opts.forEach(function(o){ o.disabled = true; });
+    opts[item.a].classList.add("correct");
+    var isCorrect = idx === item.a;
+    if(!isCorrect){ btnEl.classList.add("wrong"); }
+    recordAnswer(item, isCorrect);
+    if(item.e){ qExplainEl.hidden = false; }
+    scheduleAdvance(!!item.e);
+  }
+
+  function submitWrite(){
+    if(locked || !currentItem) return;
+    locked = true;
+    writeInputEl.disabled = true;
+    writeSubmitEl.disabled = true;
+    var given = normalize(writeInputEl.value);
+    var accepted = currentItem.answers.map(normalize);
+    var isCorrect = accepted.indexOf(given) !== -1 && given.length > 0;
+    writeInputEl.classList.add(isCorrect ? "correct" : "wrong");
+    if(!isCorrect){
+      writeAnswerEl.hidden = false;
+      writeAnswerEl.innerHTML = "Réponse attendue : <b>" + currentItem.answers[0] + "</b>";
+    }
+    recordAnswer(currentItem, isCorrect);
+    if(currentItem.e){ qExplainEl.hidden = false; }
+    scheduleAdvance(!!currentItem.e || !isCorrect);
+  }
+  writeSubmitEl.addEventListener("click", submitWrite);
+  writeInputEl.addEventListener("keydown", function(ev){
+    if(ev.key === "Enter") submitWrite();
+  });
+
   function startSession(){
+    ensureAudio();
     pool = buildPool();
     if(!pool.length) return;
     poolIdx = 0; answered = 0; correctCount = 0;
@@ -1069,6 +1338,7 @@
   function finishSession(){
     if(runTimer){ clearInterval(runTimer); runTimer = null; }
     if(advanceTimeout){ clearTimeout(advanceTimeout); advanceTimeout = null; }
+    if(answered > 0){ playEndSound(); vibrateEnd(); }
     document.getElementById("recapCorrect").textContent = correctCount;
     document.getElementById("recapOf").textContent = "/ " + answered + " bonnes réponses";
     var pct = answered ? Math.round(100*correctCount/answered) : 0;
@@ -1126,10 +1396,8 @@
       var cell = document.createElement("div");
       cell.className = "badge-cell";
       var medal = tier ? tier.medal : "▫️";
-      var next = tier ? (BADGE_TIERS[0].min > count ? BADGE_TIERS[0].min : null) : 10;
-      var nextLabel;
       var higher = BADGE_TIERS.filter(function(t){ return t.min > count; }).sort(function(a,b){return a.min-b.min;})[0];
-      nextLabel = higher ? (higher.min - count) + " pour " + higher.name : "Niveau max";
+      var nextLabel = higher ? (higher.min - count) + " pour " + higher.name : "Niveau max";
       cell.innerHTML = '<span class="badge-medal">'+medal+'</span><span class="badge-info"><b>'+subj+'</b><span>'+count+' bonnes · '+nextLabel+'</span></span>';
       grid.appendChild(cell);
     });
