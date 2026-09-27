@@ -14,6 +14,7 @@
     --accent-ink:#ffffff;
     --danger:#c14a2c;
     --good:#2f8f5b;
+    --gold:#a5790a;
     --border:#dcdfd6;
     color-scheme:light;
     padding-top:env(safe-area-inset-top,0px);
@@ -30,6 +31,7 @@
       --accent-ink:#10130a;
       --danger:#ff6b47;
       --good:#3ddc84;
+      --gold:#ffcf4d;
       --border:#2a2f1f;
       color-scheme:dark;
     }
@@ -44,6 +46,7 @@
     --accent-ink:#10130a;
     --danger:#ff6b47;
     --good:#3ddc84;
+    --gold:#ffcf4d;
     --border:#2a2f1f;
     color-scheme:dark;
   }
@@ -88,6 +91,52 @@
     padding:20px;
   }
 
+  .label{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-weight:700;
+    color:var(--text-dim);
+  }
+
+  /* ---- STREAK / GOAL CARD ---- */
+  .streak-card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .streak-flame{
+    flex:none;
+    width:52px; height:52px;
+    border-radius:16px;
+    background:var(--surface-2);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Bebas Neue", sans-serif;
+    font-size:22px;
+    color:var(--accent);
+  }
+  .streak-body{flex:1; min-width:0;}
+  .streak-body .label{margin-bottom:2px;}
+  .streak-line{font-size:13px; font-weight:600;}
+  .goal-track{
+    margin-top:8px;
+    height:8px;
+    border-radius:100px;
+    background:var(--surface-2);
+    overflow:hidden;
+  }
+  .goal-fill{
+    height:100%;
+    background:var(--accent);
+    border-radius:100px;
+    transition:width .3s;
+  }
+  .goal-caption{
+    margin-top:5px;
+    font-size:11px;
+    color:var(--text-dim);
+  }
+
   /* ---- SETUP SCREEN ---- */
   .subjects{
     display:grid;
@@ -123,6 +172,17 @@
     box-shadow:inset 0 0 0 1px var(--accent);
   }
   .chip[aria-pressed="true"] .dot{background:var(--accent);}
+  .chip .due-badge{
+    margin-left:auto;
+    flex:none;
+    font-size:10px;
+    font-weight:800;
+    background:var(--danger);
+    color:#fff;
+    border-radius:100px;
+    padding:1px 6px;
+    line-height:1.4;
+  }
 
   .durations{
     display:flex;
@@ -148,14 +208,6 @@
     border-color:var(--accent);
   }
 
-  .label{
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:0.08em;
-    font-weight:700;
-    color:var(--text-dim);
-  }
-
   .start-btn{
     appearance:none;
     border:none;
@@ -175,6 +227,24 @@
   }
   .start-btn:disabled{opacity:0.4; cursor:not-allowed;}
   .start-btn svg{width:20px;height:20px;}
+
+  .ghost-btn{
+    appearance:none;
+    border:1.5px solid var(--border);
+    background:transparent;
+    color:var(--text);
+    border-radius:14px;
+    padding:12px;
+    width:100%;
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:700;
+    font-size:13.5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
 
   .stats-row{
     display:grid;
@@ -248,6 +318,12 @@
   .qcard{
     margin-top:14px;
   }
+  .qcard .tagrow{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:10px;
+  }
   .qcard .tag{
     display:inline-block;
     font-size:10.5px;
@@ -258,7 +334,17 @@
     background:var(--surface-2);
     border-radius:100px;
     padding:4px 10px;
-    margin-bottom:10px;
+  }
+  .qcard .newtag{
+    display:inline-block;
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--accent-ink);
+    background:var(--accent);
+    border-radius:100px;
+    padding:3px 9px;
   }
   .qcard h2{
     font-family:"Work Sans", sans-serif;
@@ -332,7 +418,7 @@
     justify-content:center;
     align-items:baseline;
     gap:6px;
-    margin:10px 0 18px;
+    margin:10px 0 6px;
   }
   .recap-score b{
     font-family:"Bebas Neue", sans-serif;
@@ -341,6 +427,14 @@
     line-height:1;
   }
   .recap-score span{color:var(--text-dim); font-size:16px;}
+  .recap-badge{
+    text-align:center;
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--gold);
+    margin-bottom:16px;
+    min-height:16px;
+  }
   .again-btn{
     appearance:none; border:none;
     background:var(--accent); color:var(--accent-ink);
@@ -354,6 +448,99 @@
     border-radius:14px; padding:12px; width:100%; cursor:pointer;
     font-family:inherit; font-weight:600; font-size:14px; margin-top:8px;
   }
+
+  /* ---- HISTORY SCREEN ---- */
+  .hist-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .back-btn{
+    appearance:none;
+    border:1.5px solid var(--border);
+    background:var(--surface-2);
+    color:var(--text);
+    border-radius:10px;
+    width:36px; height:36px;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    flex:none;
+  }
+  .hist-head h2{
+    font-family:"Bebas Neue", sans-serif;
+    font-size:24px;
+    margin:0;
+  }
+  .section-title{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-weight:700;
+    color:var(--text-dim);
+    margin:18px 0 10px;
+  }
+  .section-title:first-of-type{margin-top:4px;}
+  .empty-note{
+    font-size:13px;
+    color:var(--text-dim);
+    padding:10px 0;
+  }
+  .sess-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:10px 0;
+    border-bottom:1px solid var(--border);
+    font-size:13px;
+  }
+  .sess-row:last-child{border-bottom:none;}
+  .sess-date{font-weight:700;}
+  .sess-subjects{color:var(--text-dim); font-size:11.5px; margin-top:2px;}
+  .sess-score{
+    font-family:"Bebas Neue", sans-serif;
+    font-size:18px;
+    color:var(--accent);
+    flex:none;
+  }
+  .weak-row{
+    padding:10px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .weak-row:last-child{border-bottom:none;}
+  .weak-row .tag{
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    color:var(--danger);
+    letter-spacing:0.04em;
+  }
+  .weak-row p{
+    margin:4px 0 0;
+    font-size:13.5px;
+    line-height:1.3;
+  }
+  .badge-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  .badge-cell{
+    background:var(--surface-2);
+    border-radius:14px;
+    padding:12px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .badge-medal{
+    font-size:22px;
+    flex:none;
+    width:32px;
+    text-align:center;
+  }
+  .badge-info b{display:block; font-size:12px; line-height:1.2;}
+  .badge-info span{display:block; font-size:10.5px; color:var(--text-dim); margin-top:2px;}
 
   [hidden]{display:none!important;}
 
@@ -373,7 +560,17 @@
 
   <!-- SETUP -->
   <div id="screenSetup">
-    <div class="card">
+    <div class="card streak-card">
+      <div class="streak-flame" id="streakFlame">0</div>
+      <div class="streak-body">
+        <div class="label">Série de jours</div>
+        <div class="streak-line" id="streakLine">Commence aujourd'hui</div>
+        <div class="goal-track"><div class="goal-fill" id="goalFill" style="width:0%"></div></div>
+        <div class="goal-caption" id="goalCaption">0 / 50 questions cette semaine</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
       <div class="label">Matières à réviser</div>
       <div class="subjects" id="subjectGrid"></div>
     </div>
@@ -386,6 +583,11 @@
     <button class="start-btn" id="startBtn" style="margin-top:14px;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
       Lancer la série
+    </button>
+
+    <button class="ghost-btn" id="openHistBtn" style="margin-top:10px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v5h5"></path><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"></path><path d="M12 7v5l4 2"></path></svg>
+      Historique &amp; points faibles
     </button>
 
     <div class="stats-row" style="margin-top:14px;">
@@ -414,7 +616,10 @@
       </div>
 
       <div class="qcard">
-        <span class="tag" id="qTag">CEJM</span>
+        <div class="tagrow">
+          <span class="tag" id="qTag">CEJM</span>
+          <span class="newtag" id="qNewTag" hidden>À revoir</span>
+        </div>
         <h2 id="qText">Question</h2>
         <div class="options" id="qOptions"></div>
         <div class="explain" id="qExplain" hidden></div>
@@ -428,8 +633,30 @@
       <div class="recap-title">Retour à la barre 💪</div>
       <div class="recap-sub" id="recapSub">Série terminée</div>
       <div class="recap-score"><b id="recapCorrect">0</b><span id="recapOf">/ 0 bonnes réponses</span></div>
+      <div class="recap-badge" id="recapBadge"></div>
       <button class="again-btn" id="againBtn">Encore 3 minutes</button>
       <button class="home-btn" id="homeBtn">Changer de matière</button>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div id="screenHistory" hidden>
+    <div class="card">
+      <div class="hist-head">
+        <button class="back-btn" id="backBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"></path></svg>
+        </button>
+        <h2>Historique</h2>
+      </div>
+
+      <div class="section-title">À revoir en priorité</div>
+      <div id="weakList"><div class="empty-note">Réponds à quelques questions pour voir apparaître ici celles à retravailler.</div></div>
+
+      <div class="section-title">Séries récentes</div>
+      <div id="sessList"><div class="empty-note">Aucune série enregistrée pour l'instant.</div></div>
+
+      <div class="section-title">Badges par matière</div>
+      <div class="badge-grid" id="badgeGrid"></div>
     </div>
   </div>
 
@@ -505,27 +732,109 @@
       {q:"Une concession accorde à un distributeur...", o:["L'exclusivité de distribution sur un territoire donné","La propriété de la marque","Un statut de salarié","Aucun droit particulier"], a:0},
       {q:"Une centrale d'achat sert à...", o:["Vendre directement aux clients finaux","Regrouper les achats de plusieurs points de vente pour négocier de meilleurs prix","Remplacer les fournisseurs","Gérer uniquement la publicité"], a:1},
       {q:"Un réseau intégré (comme Carrefour) est composé de...", o:["Commerçants indépendants sous contrat","Points de vente appartenant à un même groupe","Franchisés uniquement","Fournisseurs externes"], a:1}
+    ]},
+    angverb: { label:"Anglais · Verbes irr.", short:"Anglais", items:[
+      {q:"Quel est le prétérit (passé simple) de \"go\" ?", o:["Goed","Went","Gone","Going"], a:1, e:"go / went / gone."},
+      {q:"Quel est le prétérit de \"be\" à la 1ère personne (\"I\") ?", o:["Was","Were","Been","Is"], a:0, e:"I was, you were, he/she/it was."},
+      {q:"Quel est le prétérit de \"have\" ?", o:["Haved","Has","Had","Having"], a:2, e:"have / had / had."},
+      {q:"Quel est le prétérit de \"do\" ?", o:["Did","Done","Does","Doed"], a:0, e:"do / did / done."},
+      {q:"Quel est le prétérit de \"see\" ?", o:["Seen","Saw","Sees","Seed"], a:1, e:"see / saw / seen."},
+      {q:"Quel est le prétérit de \"take\" ?", o:["Taken","Took","Takes","Taked"], a:1, e:"take / took / taken."},
+      {q:"Quel est le prétérit de \"make\" ?", o:["Maked","Made","Makes","Making"], a:1, e:"make / made / made."},
+      {q:"Quel est le prétérit de \"come\" ?", o:["Comed","Came","Come","Coming"], a:1, e:"come / came / come."},
+      {q:"Quel est le prétérit de \"give\" ?", o:["Gived","Gave","Given","Give"], a:1, e:"give / gave / given."},
+      {q:"Quel est le prétérit de \"write\" ?", o:["Writed","Wrote","Written","Writing"], a:1, e:"write / wrote / written."},
+      {q:"Quel est le prétérit de \"speak\" ?", o:["Spoken","Spoke","Speaked","Speaks"], a:1, e:"speak / spoke / spoken."},
+      {q:"Quel est le prétérit de \"eat\" ?", o:["Eaten","Ate","Eated","Eats"], a:1, e:"eat / ate / eaten."},
+      {q:"Quel est le prétérit de \"drink\" ?", o:["Drunk","Drank","Drinked","Drinking"], a:1, e:"drink / drank / drunk."},
+      {q:"Quel est le prétérit de \"know\" ?", o:["Knew","Known","Knowed","Knows"], a:0, e:"know / knew / known."},
+      {q:"Quel est le prétérit de \"think\" ?", o:["Thinked","Thought","Thinking","Thoughted"], a:1, e:"think / thought / thought."},
+      {q:"Quel est le participe passé de \"break\" ?", o:["Broke","Broken","Breaked","Breaking"], a:1, e:"break / broke / broken."},
+      {q:"Quel est le participe passé de \"choose\" ?", o:["Chose","Chosen","Choosed","Choosing"], a:1, e:"choose / chose / chosen."}
     ]}
   };
 
   var order = Object.keys(BANK);
 
+  // Flatten with stable ids: subjectKey_index
+  var ALL_ITEMS = [];
+  var ITEM_BY_ID = {};
+  order.forEach(function(key){
+    BANK[key].items.forEach(function(item, idx){
+      var id = key + "_" + idx;
+      var flat = {id:id, subjectKey:key, subject:BANK[key].short, q:item.q, o:item.o, a:item.a, e:item.e || ""};
+      ALL_ITEMS.push(flat);
+      ITEM_BY_ID[id] = flat;
+    });
+  });
+
+  var DAY_MS = 24*60*60*1000;
+  var BOX_INTERVAL_DAYS = [0, 1, 2, 4, 8, 16]; // index = box (1..5), box 0 unused
+  var WEEKLY_GOAL = 50;
+  var BADGE_TIERS = [
+    {min:50, medal:"🥇", name:"Or"},
+    {min:25, medal:"🥈", name:"Argent"},
+    {min:10, medal:"🥉", name:"Bronze"}
+  ];
+
   // ---------- Storage helpers ----------
-  function loadStore(){
+  function loadJSON(key, fallback){
     try{
-      var raw = localStorage.getItem("gymrevise_v1");
+      var raw = localStorage.getItem(key);
       if(raw) return JSON.parse(raw);
     }catch(e){}
-    return {total:0, correct:0, days:{}};
+    return fallback;
   }
-  function saveStore(s){
-    try{ localStorage.setItem("gymrevise_v1", JSON.stringify(s)); }catch(e){}
+  function saveJSON(key, val){
+    try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){}
   }
-  var store = loadStore();
 
-  function todayKey(){
-    var d = new Date();
+  var store = loadJSON("gymrevise_v1", {total:0, correct:0, days:{}, subjCorrect:{}});
+  if(!store.subjCorrect) store.subjCorrect = {};
+  var srs = loadJSON("gymrevise_srs_v1", {}); // id -> {box, due, wrong, seen}
+  var history = loadJSON("gymrevise_history_v1", []); // [{ts,date,duration,subjects,answered,correct}]
+
+  function saveStore(){ saveJSON("gymrevise_v1", store); }
+  function saveSrs(){ saveJSON("gymrevise_srs_v1", srs); }
+  function saveHistory(){ saveJSON("gymrevise_history_v1", history); }
+
+  function todayKey(d){
+    d = d || new Date();
     return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+  }
+
+  // ---------- Streak & weekly goal ----------
+  function computeStreak(){
+    var streak = 0;
+    var d = new Date();
+    // if nothing done today yet, streak still counts previous consecutive days
+    if(!store.days[todayKey(d)]) d = new Date(d.getTime() - DAY_MS);
+    while(store.days[todayKey(d)]){
+      streak++;
+      d = new Date(d.getTime() - DAY_MS);
+    }
+    return streak;
+  }
+
+  function computeWeeklyCount(){
+    var total = 0;
+    for(var i = 0; i < 7; i++){
+      var d = new Date(Date.now() - i*DAY_MS);
+      total += (store.days[todayKey(d)] || 0);
+    }
+    return total;
+  }
+
+  function renderStreak(){
+    var streak = computeStreak();
+    document.getElementById("streakFlame").textContent = streak;
+    document.getElementById("streakLine").textContent = streak > 0
+      ? (streak === 1 ? "1 jour d'affilée 🔥" : streak + " jours d'affilée 🔥")
+      : "Commence aujourd'hui";
+    var weekly = computeWeeklyCount();
+    var pct = Math.min(100, Math.round(100*weekly/WEEKLY_GOAL));
+    document.getElementById("goalFill").style.width = pct + "%";
+    document.getElementById("goalCaption").textContent = weekly + " / " + WEEKLY_GOAL + " questions cette semaine";
   }
 
   function renderStats(){
@@ -533,6 +842,39 @@
     document.getElementById("statToday").textContent = (store.days[tk] || 0);
     document.getElementById("statTotal").textContent = store.total;
     document.getElementById("statAcc").textContent = store.total ? Math.round(100*store.correct/store.total)+"%" : "—";
+    renderStreak();
+  }
+
+  // ---------- SRS helpers ----------
+  function getSrs(id){
+    return srs[id] || {box:0, due:0, wrong:0, seen:0};
+  }
+  function isDue(id){
+    var s = getSrs(id);
+    return s.seen === 0 || s.due <= Date.now();
+  }
+  function updateSrsAnswer(id, correct){
+    var s = getSrs(id);
+    s.seen = (s.seen||0) + 1;
+    if(correct){
+      s.box = Math.min((s.box||0) + 1, 5);
+      var days = BOX_INTERVAL_DAYS[s.box] || 1;
+      s.due = Date.now() + days*DAY_MS;
+    } else {
+      s.wrong = (s.wrong||0) + 1;
+      s.box = 1;
+      s.due = Date.now(); // resurfaces almost immediately
+    }
+    srs[id] = s;
+    saveSrs();
+  }
+
+  function countDueForSubjects(subjectKeys){
+    var n = 0;
+    ALL_ITEMS.forEach(function(item){
+      if(subjectKeys.indexOf(item.subjectKey) !== -1 && isDue(item.id)) n++;
+    });
+    return n;
   }
 
   // ---------- Setup screen state ----------
@@ -541,12 +883,18 @@
   var duration = 180; // seconds
 
   var subjectGrid = document.getElementById("subjectGrid");
+  var chipDueEls = {};
   order.forEach(function(key){
     var btn = document.createElement("button");
     btn.className = "chip";
     btn.type = "button";
     btn.setAttribute("aria-pressed", "true");
-    btn.innerHTML = '<span class="dot"></span>' + BANK[key].label;
+    var dueSpan = document.createElement("span");
+    dueSpan.className = "due-badge";
+    dueSpan.hidden = true;
+    btn.innerHTML = '<span class="dot"></span><span>' + BANK[key].label + '</span>';
+    btn.appendChild(dueSpan);
+    chipDueEls[key] = dueSpan;
     btn.addEventListener("click", function(){
       selectedSubjects[key] = !selectedSubjects[key];
       btn.setAttribute("aria-pressed", selectedSubjects[key] ? "true" : "false");
@@ -554,6 +902,15 @@
     });
     subjectGrid.appendChild(btn);
   });
+
+  function renderDueBadges(){
+    order.forEach(function(key){
+      var n = countDueForSubjects([key]);
+      var el = chipDueEls[key];
+      if(n > 0){ el.hidden = false; el.textContent = n; }
+      else { el.hidden = true; }
+    });
+  }
 
   var durationGrid = document.getElementById("durationGrid");
   [["2 min",120], ["3 min",180], ["5 min",300]].forEach(function(pair){
@@ -577,32 +934,39 @@
   }
   updateStartState();
 
-  // ---------- Question pool ----------
+  // ---------- Question pool (spaced repetition aware) ----------
   function buildPool(){
-    var pool = [];
-    order.forEach(function(key){
-      if(!selectedSubjects[key]) return;
-      BANK[key].items.forEach(function(item){
-        pool.push({subject:BANK[key].short, q:item.q, o:item.o, a:item.a, e:item.e || ""});
-      });
+    var subjKeys = order.filter(function(k){ return selectedSubjects[k]; });
+    var due = [];
+    var rest = [];
+    ALL_ITEMS.forEach(function(item){
+      if(subjKeys.indexOf(item.subjectKey) === -1) return;
+      if(isDue(item.id)) due.push(item); else rest.push(item);
     });
-    // shuffle
-    for(var i = pool.length - 1; i > 0; i--){
-      var j = Math.floor(Math.random() * (i+1));
-      var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
+    function shuffle(arr){
+      for(var i = arr.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i+1));
+        var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+      }
+      return arr;
     }
-    return pool;
+    // priority: lower box (more urgent) first among due items
+    due.sort(function(a,b){ return getSrs(a.id).box - getSrs(b.id).box; });
+    shuffle(rest);
+    return due.concat(rest);
   }
 
   // ---------- Screens ----------
   var screenSetup = document.getElementById("screenSetup");
   var screenRun = document.getElementById("screenRun");
   var screenRecap = document.getElementById("screenRecap");
+  var screenHistory = document.getElementById("screenHistory");
 
   function showScreen(name){
     screenSetup.hidden = name !== "setup";
     screenRun.hidden = name !== "run";
     screenRecap.hidden = name !== "recap";
+    screenHistory.hidden = name !== "history";
   }
 
   // ---------- Run state ----------
@@ -613,12 +977,14 @@
   var timeLeftEl = document.getElementById("timeLeft");
   var scoreRunEl = document.getElementById("scoreRun");
   var qTagEl = document.getElementById("qTag");
+  var qNewTagEl = document.getElementById("qNewTag");
   var qTextEl = document.getElementById("qText");
   var qOptionsEl = document.getElementById("qOptions");
   var qExplainEl = document.getElementById("qExplain");
 
   var runTimer = null, endsAt = 0, totalDuration = 180;
   var pool = [], poolIdx = 0, answered = 0, correctCount = 0, advanceTimeout = null;
+  var sessionSubjects = [];
 
   function fmtTime(s){
     var m = Math.floor(s/60), sec = s%60;
@@ -638,8 +1004,11 @@
   function nextQuestion(){
     if(advanceTimeout){ clearTimeout(advanceTimeout); advanceTimeout = null; }
     if(poolIdx >= pool.length){ pool = buildPool(); poolIdx = 0; }
+    if(!pool.length) return;
     var item = pool[poolIdx++];
     qTagEl.textContent = item.subject;
+    var s = getSrs(item.id);
+    qNewTagEl.hidden = !(s.seen > 0 && s.box <= 2);
     qTextEl.textContent = item.q;
     qExplainEl.hidden = true;
     qExplainEl.textContent = item.e;
@@ -661,16 +1030,21 @@
     var opts = qOptionsEl.querySelectorAll(".opt");
     opts.forEach(function(o){ o.disabled = true; });
     opts[item.a].classList.add("correct");
-    if(idx !== item.a){ btnEl.classList.add("wrong"); }
-    answered++;
     var isCorrect = idx === item.a;
+    if(!isCorrect){ btnEl.classList.add("wrong"); }
+    answered++;
     if(isCorrect) correctCount++;
     scoreRunEl.textContent = correctCount + " / " + answered;
+
     store.total++;
     if(isCorrect) store.correct++;
     var tk = todayKey();
     store.days[tk] = (store.days[tk] || 0) + 1;
-    saveStore(store);
+    if(isCorrect){ store.subjCorrect[item.subject] = (store.subjCorrect[item.subject] || 0) + 1; }
+    saveStore();
+    updateSrsAnswer(item.id, isCorrect);
+    if(sessionSubjects.indexOf(item.subject) === -1) sessionSubjects.push(item.subject);
+
     if(item.e){ qExplainEl.hidden = false; }
     advanceTimeout = setTimeout(function(){
       qOptionsEl.removeAttribute("data-locked");
@@ -682,6 +1056,7 @@
     pool = buildPool();
     if(!pool.length) return;
     poolIdx = 0; answered = 0; correctCount = 0;
+    sessionSubjects = [];
     totalDuration = duration;
     endsAt = Date.now() + duration * 1000;
     scoreRunEl.textContent = "0 / 0";
@@ -699,8 +1074,104 @@
     var pct = answered ? Math.round(100*correctCount/answered) : 0;
     var msg = pct >= 80 ? "Solide, tu maîtrises." : pct >= 50 ? "Pas mal, encore un effort." : "Continue, ça va rentrer.";
     document.getElementById("recapSub").textContent = msg + " Retourne à la barre.";
+
+    if(answered > 0){
+      history.unshift({
+        ts: Date.now(),
+        date: new Date().toLocaleDateString("fr-FR", {day:"2-digit", month:"2-digit"}),
+        duration: totalDuration,
+        subjects: sessionSubjects,
+        answered: answered,
+        correct: correctCount
+      });
+      if(history.length > 40) history.length = 40;
+      saveHistory();
+    }
+
+    document.getElementById("recapBadge").textContent = checkNewBadges();
     renderStats();
+    renderDueBadges();
     showScreen("recap");
+  }
+
+  // ---------- Badges ----------
+  function badgeTierFor(count){
+    for(var i = 0; i < BADGE_TIERS.length; i++){
+      if(count >= BADGE_TIERS[i].min) return BADGE_TIERS[i];
+    }
+    return null;
+  }
+  var lastKnownTier = loadJSON("gymrevise_badgetiers_v1", {});
+  function checkNewBadges(){
+    var messages = [];
+    Object.keys(store.subjCorrect).forEach(function(subj){
+      var count = store.subjCorrect[subj];
+      var tier = badgeTierFor(count);
+      if(tier && lastKnownTier[subj] !== tier.name){
+        lastKnownTier[subj] = tier.name;
+        messages.push(tier.medal + " Badge " + tier.name + " en " + subj + " !");
+      }
+    });
+    saveJSON("gymrevise_badgetiers_v1", lastKnownTier);
+    return messages.join(" ");
+  }
+
+  function renderBadgeGrid(){
+    var grid = document.getElementById("badgeGrid");
+    grid.innerHTML = "";
+    order.forEach(function(key){
+      var subj = BANK[key].short;
+      var count = store.subjCorrect[subj] || 0;
+      var tier = badgeTierFor(count);
+      var cell = document.createElement("div");
+      cell.className = "badge-cell";
+      var medal = tier ? tier.medal : "▫️";
+      var next = tier ? (BADGE_TIERS[0].min > count ? BADGE_TIERS[0].min : null) : 10;
+      var nextLabel;
+      var higher = BADGE_TIERS.filter(function(t){ return t.min > count; }).sort(function(a,b){return a.min-b.min;})[0];
+      nextLabel = higher ? (higher.min - count) + " pour " + higher.name : "Niveau max";
+      cell.innerHTML = '<span class="badge-medal">'+medal+'</span><span class="badge-info"><b>'+subj+'</b><span>'+count+' bonnes · '+nextLabel+'</span></span>';
+      grid.appendChild(cell);
+    });
+  }
+
+  // ---------- History screen ----------
+  function renderHistoryScreen(){
+    var sessList = document.getElementById("sessList");
+    if(!history.length){
+      sessList.innerHTML = '<div class="empty-note">Aucune série enregistrée pour l\'instant.</div>';
+    } else {
+      sessList.innerHTML = "";
+      history.slice(0, 10).forEach(function(h){
+        var row = document.createElement("div");
+        row.className = "sess-row";
+        row.innerHTML = '<div><div class="sess-date">'+h.date+' · '+Math.round(h.duration/60)+' min</div>'+
+          '<div class="sess-subjects">'+(h.subjects.join(", ") || "—")+'</div></div>'+
+          '<div class="sess-score">'+h.correct+'/'+h.answered+'</div>';
+        sessList.appendChild(row);
+      });
+    }
+
+    var weakList = document.getElementById("weakList");
+    var weakIds = Object.keys(srs).filter(function(id){
+      var s = srs[id];
+      return s.wrong > 0 && s.box <= 3;
+    }).sort(function(a,b){ return srs[b].wrong - srs[a].wrong; }).slice(0, 5);
+    if(!weakIds.length){
+      weakList.innerHTML = '<div class="empty-note">Réponds à quelques questions pour voir apparaître ici celles à retravailler.</div>';
+    } else {
+      weakList.innerHTML = "";
+      weakIds.forEach(function(id){
+        var item = ITEM_BY_ID[id];
+        if(!item) return;
+        var row = document.createElement("div");
+        row.className = "weak-row";
+        row.innerHTML = '<span class="tag">'+item.subject+' · '+srs[id].wrong+' erreur'+(srs[id].wrong>1?'s':'')+'</span><p>'+item.q+'</p>';
+        weakList.appendChild(row);
+      });
+    }
+
+    renderBadgeGrid();
   }
 
   document.getElementById("startBtn").addEventListener("click", startSession);
@@ -708,10 +1179,19 @@
   document.getElementById("againBtn").addEventListener("click", startSession);
   document.getElementById("homeBtn").addEventListener("click", function(){
     renderStats();
+    renderDueBadges();
+    showScreen("setup");
+  });
+  document.getElementById("openHistBtn").addEventListener("click", function(){
+    renderHistoryScreen();
+    showScreen("history");
+  });
+  document.getElementById("backBtn").addEventListener("click", function(){
     showScreen("setup");
   });
 
   renderStats();
+  renderDueBadges();
   showScreen("setup");
 })();
 </script>
