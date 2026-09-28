@@ -223,6 +223,46 @@
     border-color:var(--accent);
   }
 
+  .mode-row{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+  }
+  .mode-btn{
+    flex:1;
+    appearance:none;
+    border:1.5px solid var(--border);
+    background:var(--surface-2);
+    color:var(--text);
+    border-radius:14px;
+    padding:12px 8px;
+    font-family:inherit;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2px;
+    text-align:center;
+  }
+  .mode-btn .mode-icon{ font-size:20px; line-height:1; }
+  .mode-btn .mode-label{
+    font-family:"Bebas Neue", sans-serif;
+    font-size:16px;
+    letter-spacing:0.03em;
+  }
+  .mode-btn .mode-sub{
+    font-size:10.5px;
+    color:var(--text-dim);
+    line-height:1.2;
+  }
+  .mode-btn[aria-pressed="true"]{
+    background:var(--accent);
+    border-color:var(--accent);
+  }
+  .mode-btn[aria-pressed="true"] .mode-label,
+  .mode-btn[aria-pressed="true"] .mode-icon{ color:var(--accent-ink); }
+  .mode-btn[aria-pressed="true"] .mode-sub{ color:var(--accent-ink); opacity:0.85; }
+
   .theme-row{
     display:flex;
     gap:10px;
@@ -653,12 +693,28 @@
     </div>
 
     <div class="card" style="margin-top:14px;">
+      <div class="label">Mode</div>
+      <div class="mode-row" id="modeRow">
+        <button class="mode-btn" id="modeSalleBtn" type="button">
+          <span class="mode-icon">🏋️</span>
+          <span class="mode-label">Salle</span>
+          <span class="mode-sub">QCM rapides, entre les séries</span>
+        </button>
+        <button class="mode-btn" id="modeMaisonBtn" type="button">
+          <span class="mode-icon">🏠</span>
+          <span class="mode-label">Maison</span>
+          <span class="mode-sub">Questions à rédiger, plus de temps</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
       <div class="label">Matières à réviser</div>
       <div class="subjects" id="subjectGrid"></div>
     </div>
 
     <div class="card" style="margin-top:14px;">
-      <div class="label">Durée du repos</div>
+      <div class="label" id="durationLabel">Durée du repos</div>
       <div class="durations" id="durationGrid"></div>
       <div class="label" style="margin-top:16px;">Couleur</div>
       <div class="theme-row" id="themeRow"></div>
@@ -935,7 +991,11 @@
   if(!store.subjCorrect) store.subjCorrect = {};
   var srs = loadJSON("gymrevise_srs_v1", {});
   var history = loadJSON("gymrevise_history_v1", []);
-  var prefs = loadJSON("gymrevise_prefs_v1", {subjects:null, duration:180, theme:"lime", goal:50});
+  var prefs = loadJSON("gymrevise_prefs_v1", {subjects:null, duration:180, theme:"lime", goal:50, mode:"salle"});
+  var MODE_DURATIONS = {
+    salle:  [["1 min",60], ["2 min",120], ["3 min",180]],
+    maison: [["5 min",300], ["10 min",600], ["15 min",900]]
+  };
   if(!prefs.goal) prefs.goal = 50;
   if(!prefs.theme) prefs.theme = "lime";
 
@@ -1155,21 +1215,49 @@
   }
 
   var durationGrid = document.getElementById("durationGrid");
-  [["2 min",120], ["3 min",180], ["5 min",300]].forEach(function(pair){
-    var btn = document.createElement("button");
-    btn.className = "dur-btn";
-    btn.type = "button";
-    btn.textContent = pair[0];
-    btn.setAttribute("aria-pressed", pair[1] === duration ? "true" : "false");
-    btn.addEventListener("click", function(){
-      duration = pair[1];
-      prefs.duration = duration;
-      savePrefs();
-      Array.prototype.forEach.call(durationGrid.children, function(c){ c.setAttribute("aria-pressed","false"); });
-      btn.setAttribute("aria-pressed","true");
+  var durationLabelEl = document.getElementById("durationLabel");
+  function renderDurationOptions(){
+    var opts = MODE_DURATIONS[currentMode];
+    var inList = opts.some(function(p){ return p[1] === duration; });
+    if(!inList){ duration = opts[1][1]; }
+    prefs.duration = duration;
+    durationLabelEl.textContent = currentMode === "maison" ? "Durée de révision" : "Durée du repos";
+    durationGrid.innerHTML = "";
+    opts.forEach(function(pair){
+      var btn = document.createElement("button");
+      btn.className = "dur-btn";
+      btn.type = "button";
+      btn.textContent = pair[0];
+      btn.setAttribute("aria-pressed", pair[1] === duration ? "true" : "false");
+      btn.addEventListener("click", function(){
+        duration = pair[1];
+        prefs.duration = duration;
+        savePrefs();
+        Array.prototype.forEach.call(durationGrid.children, function(c){ c.setAttribute("aria-pressed","false"); });
+        btn.setAttribute("aria-pressed","true");
+      });
+      durationGrid.appendChild(btn);
     });
-    durationGrid.appendChild(btn);
-  });
+  }
+
+  var currentMode = prefs.mode === "maison" ? "maison" : "salle";
+  var modeSalleBtn = document.getElementById("modeSalleBtn");
+  var modeMaisonBtn = document.getElementById("modeMaisonBtn");
+  function renderModeButtons(){
+    modeSalleBtn.setAttribute("aria-pressed", currentMode === "salle" ? "true" : "false");
+    modeMaisonBtn.setAttribute("aria-pressed", currentMode === "maison" ? "true" : "false");
+  }
+  function setMode(m){
+    currentMode = m;
+    prefs.mode = m;
+    savePrefs();
+    renderModeButtons();
+    renderDurationOptions();
+  }
+  modeSalleBtn.addEventListener("click", function(){ setMode("salle"); });
+  modeMaisonBtn.addEventListener("click", function(){ setMode("maison"); });
+  renderModeButtons();
+  renderDurationOptions();
 
   var startBtn = document.getElementById("startBtn");
   function updateStartState(){
@@ -1185,6 +1273,7 @@
     var rest = [];
     ALL_ITEMS.forEach(function(item){
       if(subjKeys.indexOf(item.subjectKey) === -1) return;
+      if(currentMode === "salle" && item.type === "write") return;
       if(isDue(item.id)) due.push(item); else rest.push(item);
     });
     function shuffle(arr){
@@ -1305,9 +1394,12 @@
   }
 
   function scheduleAdvance(hasExplain){
+    var delay;
+    if(currentMode === "maison"){ delay = hasExplain ? 3200 : 1800; }
+    else { delay = hasExplain ? 1900 : 1100; }
     advanceTimeout = setTimeout(function(){
       if(Date.now() < endsAt){ nextQuestion(); }
-    }, hasExplain ? 1900 : 1100);
+    }, delay);
   }
 
   function chooseAnswer(item, idx, btnEl){
