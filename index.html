@@ -706,6 +706,19 @@
           <span class="mode-sub">Questions à rédiger, plus de temps</span>
         </button>
       </div>
+      <div class="label" style="margin-top:16px;">Difficulté</div>
+      <div class="mode-row" id="diffRow">
+        <button class="mode-btn" id="diffFacileBtn" type="button">
+          <span class="mode-icon">🟢</span>
+          <span class="mode-label">Facile</span>
+          <span class="mode-sub">Mauvaises réponses évidentes</span>
+        </button>
+        <button class="mode-btn" id="diffDifficileBtn" type="button">
+          <span class="mode-icon">🔴</span>
+          <span class="mode-label">Difficile</span>
+          <span class="mode-sub">Pièges avec des vrais termes proches</span>
+        </button>
+      </div>
     </div>
 
     <div class="card" style="margin-top:14px;">
@@ -954,6 +967,19 @@
     });
   });
 
+  // Pool of real correct-answer texts per subject, used to build tougher
+  // decoys in "Difficile" mode (real BTS terms mixed in as wrong answers,
+  // never invented facts).
+  var SUBJECT_ANSWER_POOL = {};
+  ALL_ITEMS.forEach(function(item){
+    if(item.type === "write") return;
+    var txt = item.o[item.a];
+    if(!SUBJECT_ANSWER_POOL[item.subjectKey]) SUBJECT_ANSWER_POOL[item.subjectKey] = [];
+    if(SUBJECT_ANSWER_POOL[item.subjectKey].indexOf(txt) === -1){
+      SUBJECT_ANSWER_POOL[item.subjectKey].push(txt);
+    }
+  });
+
   var DAY_MS = 24*60*60*1000;
   var BOX_INTERVAL_DAYS = [0, 1, 2, 4, 8, 16]; // index = box (1..5), box 0 unused
   var BADGE_TIERS = [
@@ -991,7 +1017,7 @@
   if(!store.subjCorrect) store.subjCorrect = {};
   var srs = loadJSON("gymrevise_srs_v1", {});
   var history = loadJSON("gymrevise_history_v1", []);
-  var prefs = loadJSON("gymrevise_prefs_v1", {subjects:null, duration:180, theme:"lime", goal:50, mode:"salle"});
+  var prefs = loadJSON("gymrevise_prefs_v1", {subjects:null, duration:180, theme:"lime", goal:50, mode:"salle", difficulty:"facile"});
   var MODE_DURATIONS = {
     salle:  [["1 min",60], ["2 min",120], ["3 min",180]],
     maison: [["5 min",300], ["10 min",600], ["15 min",900]]
@@ -1259,6 +1285,59 @@
   renderModeButtons();
   renderDurationOptions();
 
+  var currentDifficulty = prefs.difficulty === "difficile" ? "difficile" : "facile";
+  var diffFacileBtn = document.getElementById("diffFacileBtn");
+  var diffDifficileBtn = document.getElementById("diffDifficileBtn");
+  function renderDiffButtons(){
+    diffFacileBtn.setAttribute("aria-pressed", currentDifficulty === "facile" ? "true" : "false");
+    diffDifficileBtn.setAttribute("aria-pressed", currentDifficulty === "difficile" ? "true" : "false");
+  }
+  function setDifficulty(d){
+    currentDifficulty = d;
+    prefs.difficulty = d;
+    savePrefs();
+    renderDiffButtons();
+  }
+  diffFacileBtn.addEventListener("click", function(){ setDifficulty("facile"); });
+  diffDifficileBtn.addEventListener("click", function(){ setDifficulty("difficile"); });
+  renderDiffButtons();
+
+  // Builds the options actually shown for an MCQ item, depending on
+  // difficulty. "Facile" keeps the item's own (more clearly wrong) decoys.
+  // "Difficile" swaps in real correct-answer texts from other questions in
+  // the same subject as decoys — genuine BTS terms, just wrong here, which
+  // makes elimination-by-vibe much harder without inventing any content.
+  function buildDisplayOptions(item){
+    if(item.type === "write") return null;
+    if(currentDifficulty === "facile"){
+      return { options: item.o.slice(), correctIdx: item.a };
+    }
+    var correctText = item.o[item.a];
+    var pool = (SUBJECT_ANSWER_POOL[item.subjectKey] || []).filter(function(t){
+      return t !== correctText && item.o.indexOf(t) === -1;
+    });
+    function shuffle(arr){
+      for(var i = arr.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i+1));
+        var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+      }
+      return arr;
+    }
+    shuffle(pool);
+    var decoys = pool.slice(0, 3);
+    // Not enough cross-question decoys in this subject: pad with the
+    // item's own original wrong options.
+    if(decoys.length < 3){
+      item.o.forEach(function(t, idx){
+        if(decoys.length >= 3) return;
+        if(idx === item.a) return;
+        if(decoys.indexOf(t) === -1) decoys.push(t);
+      });
+    }
+    var options = shuffle([correctText].concat(decoys));
+    return { options: options, correctIdx: options.indexOf(correctText) };
+  }
+
   var startBtn = document.getElementById("startBtn");
   function updateStartState(){
     var any = order.some(function(k){ return selectedSubjects[k]; });
@@ -1321,7 +1400,7 @@
   var runTimer = null, endsAt = 0, totalDuration = 180;
   var pool = [], poolIdx = 0, answered = 0, correctCount = 0, advanceTimeout = null;
   var sessionSubjects = [];
-  var currentItem = null, locked = false;
+  var currentItem = null, locked = false, currentDisplay = null;
 
   function fmtTime(s){
     var m = Math.floor(s/60), sec = s%60;
@@ -1366,8 +1445,10 @@
       qWriteEl.hidden = true;
       qOptionsEl.hidden = false;
       qOptionsEl.innerHTML = "";
+      var display = buildDisplayOptions(item);
+      currentDisplay = display;
       var letters = ["A","B","C","D"];
-      item.o.forEach(function(optText, idx){
+      display.options.forEach(function(optText, idx){
         var b = document.createElement("button");
         b.className = "opt";
         b.type = "button";
@@ -1405,10 +1486,11 @@
   function chooseAnswer(item, idx, btnEl){
     if(locked) return;
     locked = true;
+    var correctIdx = currentDisplay ? currentDisplay.correctIdx : item.a;
     var opts = qOptionsEl.querySelectorAll(".opt");
     opts.forEach(function(o){ o.disabled = true; });
-    opts[item.a].classList.add("correct");
-    var isCorrect = idx === item.a;
+    opts[correctIdx].classList.add("correct");
+    var isCorrect = idx === correctIdx;
     if(!isCorrect){ btnEl.classList.add("wrong"); }
     recordAnswer(item, isCorrect);
     if(item.e){ qExplainEl.hidden = false; }
