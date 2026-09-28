@@ -611,8 +611,23 @@
     color:var(--text-dim);
     margin-top:4px;
   }
+  #endFlash{
+    position:fixed; inset:0; z-index:9999; pointer-events:none;
+    background:var(--accent); opacity:0;
+  }
+  #endFlash.flash-active{
+    animation:endFlashPulse .7s ease-out;
+  }
+  @keyframes endFlashPulse{
+    0%{ opacity:0; }
+    12%{ opacity:.55; }
+    30%{ opacity:0; }
+    45%{ opacity:.4; }
+    60%{ opacity:0; }
+  }
 </style>
 
+<div id="endFlash" aria-hidden="true"></div>
 <div class="app">
   <div class="brand">
     <h1>Repos <span>&amp; révise</span></h1>
@@ -1003,6 +1018,16 @@
   function vibrateEnd(){
     try{ if(navigator.vibrate) navigator.vibrate([180, 90, 180]); }catch(e){}
   }
+  function flashEnd(){
+    try{
+      var el = document.getElementById("endFlash");
+      if(!el) return;
+      el.classList.remove("flash-active");
+      void el.offsetWidth;
+      el.classList.add("flash-active");
+      setTimeout(function(){ el.classList.remove("flash-active"); }, 700);
+    }catch(e){}
+  }
 
   // ---------- Streak & weekly goal ----------
   function computeStreak(){
@@ -1338,7 +1363,7 @@
   function finishSession(){
     if(runTimer){ clearInterval(runTimer); runTimer = null; }
     if(advanceTimeout){ clearTimeout(advanceTimeout); advanceTimeout = null; }
-    if(answered > 0){ playEndSound(); vibrateEnd(); }
+    if(answered > 0){ playEndSound(); vibrateEnd(); flashEnd(); }
     document.getElementById("recapCorrect").textContent = correctCount;
     document.getElementById("recapOf").textContent = "/ " + answered + " bonnes réponses";
     var pct = answered ? Math.round(100*correctCount/answered) : 0;
