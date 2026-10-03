@@ -1,0 +1,668 @@
+{
+  "label": "Français · Orthographe",
+  "short": "Français",
+  "items": [
+    {
+      "q": "Complète par « a » ou « à » : Il ___ mangé une pomme avant de partir.",
+      "type": "write",
+      "answers": [
+        "a"
+      ],
+      "e": "« a » = verbe avoir (on peut dire « il avait »). « à » est une préposition.",
+      "id": "francais_0"
+    },
+    {
+      "q": "Complète par « a » ou « à » : Elle habite ___ Paris depuis deux ans.",
+      "type": "write",
+      "answers": [
+        "à"
+      ],
+      "id": "francais_1"
+    },
+    {
+      "q": "Complète par « et » ou « est » : Paul ___ fatigué ce soir.",
+      "type": "write",
+      "answers": [
+        "est"
+      ],
+      "e": "« est » = verbe être (on peut dire « il était »). « et » relie deux mots ou groupes.",
+      "id": "francais_2"
+    },
+    {
+      "q": "Complète par « et » ou « est » : Il a pris son sac ___ son manteau.",
+      "type": "write",
+      "answers": [
+        "et"
+      ],
+      "id": "francais_3"
+    },
+    {
+      "q": "Complète par « ou » ou « où » : Tu préfères le thé ___ le café ?",
+      "type": "write",
+      "answers": [
+        "ou"
+      ],
+      "e": "« ou » = choix (on peut dire « ou bien »). « où » indique un lieu ou un moment.",
+      "id": "francais_4"
+    },
+    {
+      "q": "Complète par « ou » ou « où » : Je ne sais pas ___ j'ai posé mes clés.",
+      "type": "write",
+      "answers": [
+        "où"
+      ],
+      "id": "francais_5"
+    },
+    {
+      "q": "Complète par « son » ou « sont » : Il a oublié ___ téléphone chez lui.",
+      "type": "write",
+      "answers": [
+        "son"
+      ],
+      "e": "« son » est un déterminant possessif (son + nom). « sont » = verbe être (ils sont).",
+      "id": "francais_6"
+    },
+    {
+      "q": "Complète par « son » ou « sont » : Mes parents ___ en vacances cette semaine.",
+      "type": "write",
+      "answers": [
+        "sont"
+      ],
+      "id": "francais_7"
+    },
+    {
+      "q": "Complète par « ces » ou « ses » : ___ chaussures lui appartiennent.",
+      "type": "write",
+      "answers": [
+        "ses"
+      ],
+      "e": "« ses » = déterminant possessif (les siennes). « ces » est un démonstratif (ces livres-là).",
+      "id": "francais_8"
+    },
+    {
+      "q": "Complète par « ces » ou « ses » : Regarde ___ nuages, il va pleuvoir.",
+      "type": "write",
+      "answers": [
+        "ces"
+      ],
+      "id": "francais_9"
+    },
+    {
+      "q": "Complète par « c'est » ou « s'est » : ___ en courant qu'il est tombé.",
+      "type": "write",
+      "answers": [
+        "c'est"
+      ],
+      "e": "« c'est » = présentatif (ce + est). « s'est » est un verbe pronominal au passé composé.",
+      "id": "francais_10"
+    },
+    {
+      "q": "Complète par « c'est » ou « s'est » : Elle ___ trompée de route.",
+      "type": "write",
+      "answers": [
+        "s'est"
+      ],
+      "e": "« s'est » = verbe pronominal (se tromper, au passé composé).",
+      "id": "francais_11"
+    },
+    {
+      "q": "Complète par « on » ou « ont » : Mes amis ___ réservé une table.",
+      "type": "write",
+      "answers": [
+        "ont"
+      ],
+      "e": "« ont » = verbe avoir (ils ont). « on » est un pronom (on peut le remplacer par il).",
+      "id": "francais_12"
+    },
+    {
+      "q": "Complète par « on » ou « ont » : ___ part demain matin.",
+      "type": "write",
+      "answers": [
+        "on"
+      ],
+      "id": "francais_13"
+    },
+    {
+      "q": "Complète par « leur » ou « leurs » : Je ___ ai envoyé un message.",
+      "type": "write",
+      "answers": [
+        "leur"
+      ],
+      "e": "« leur » pronom (invariable devant un verbe) ; « leurs » déterminant pluriel devant un nom.",
+      "id": "francais_14"
+    },
+    {
+      "q": "Complète par « leur » ou « leurs » : Ils ont rangé ___ affaires.",
+      "type": "write",
+      "answers": [
+        "leurs"
+      ],
+      "id": "francais_15"
+    },
+    {
+      "q": "Complète par « quel » ou « qu'elle » : ___ heure est-il ?",
+      "type": "write",
+      "answers": [
+        "quelle"
+      ],
+      "e": "Ici « quelle » est un déterminant interrogatif accordé au féminin (heure).",
+      "id": "francais_16"
+    },
+    {
+      "q": "Complète par « quel » ou « qu'elle » : Je pense ___ a raison.",
+      "type": "write",
+      "answers": [
+        "qu'elle"
+      ],
+      "e": "« qu'elle » = que + elle (on peut dire « qu'il »).",
+      "id": "francais_17"
+    },
+    {
+      "q": "Complète par « peu », « peux » ou « peut » : Il ___ venir demain s'il le souhaite.",
+      "type": "write",
+      "answers": [
+        "peut"
+      ],
+      "id": "francais_18"
+    },
+    {
+      "q": "Complète par « peu », « peux » ou « peut » : Je n'ai ___ de temps libre.",
+      "type": "write",
+      "answers": [
+        "peu"
+      ],
+      "id": "francais_19"
+    },
+    {
+      "q": "Complète par « quand », « quant » ou « qu'en » : ___ à moi, je reste ici.",
+      "type": "write",
+      "answers": [
+        "quant"
+      ],
+      "e": "« quant à » = en ce qui concerne.",
+      "id": "francais_20"
+    },
+    {
+      "q": "Complète par « quand », « quant » ou « qu'en » : ___ partiras-tu en vacances ?",
+      "type": "write",
+      "answers": [
+        "quand"
+      ],
+      "id": "francais_21"
+    },
+    {
+      "q": "Complète par « ce » ou « se » : Il faut ___ dépêcher, le train arrive.",
+      "type": "write",
+      "answers": [
+        "se"
+      ],
+      "e": "« se » devant un verbe pronominal. « ce » est un déterminant ou pronom démonstratif.",
+      "id": "francais_22"
+    },
+    {
+      "q": "Complète par « ce » ou « se » : ___ livre est passionnant.",
+      "type": "write",
+      "answers": [
+        "ce"
+      ],
+      "id": "francais_23"
+    },
+    {
+      "q": "Complète par « tout » ou « tous » : Il a mangé ___ le gâteau.",
+      "type": "write",
+      "answers": [
+        "tout"
+      ],
+      "id": "francais_24"
+    },
+    {
+      "q": "Complète par « tout » ou « tous » : ___ les élèves sont présents.",
+      "type": "write",
+      "answers": [
+        "tous"
+      ],
+      "id": "francais_25"
+    },
+    {
+      "q": "Complète par « davantage » ou « d'avantage » : Travaille ___, tu progresseras.",
+      "type": "write",
+      "answers": [
+        "davantage"
+      ],
+      "e": "« davantage » (en un mot) signifie « plus ». « d'avantage(s) » renvoie à un bénéfice.",
+      "id": "francais_26"
+    },
+    {
+      "q": "Complète par « plutôt » ou « plus tôt » : Pars ___ demain matin, il y aura moins de monde.",
+      "type": "write",
+      "answers": [
+        "plus tôt"
+      ],
+      "e": "« plus tôt » s'oppose à « plus tard » (notion de temps). « plutôt » signifie « de préférence ».",
+      "id": "francais_27"
+    },
+    {
+      "q": "Complète par « près » ou « prêt » : Il habite tout ___ de chez moi.",
+      "type": "write",
+      "answers": [
+        "près"
+      ],
+      "e": "« près » (lieu/distance) s'écrit sans t. « prêt » (préparé) s'accorde comme un adjectif.",
+      "id": "francais_28"
+    },
+    {
+      "q": "Complète par « près » ou « prêt » : Es-tu ___ à partir ?",
+      "type": "write",
+      "answers": [
+        "prêt"
+      ],
+      "id": "francais_29"
+    },
+    {
+      "q": "Accorde le participe passé : Les lettres qu'il a (écrire) ___ sont arrivées.",
+      "type": "write",
+      "answers": [
+        "écrites"
+      ],
+      "e": "COD « que » (les lettres) placé avant l'auxiliaire avoir : le participe s'accorde.",
+      "id": "francais_30"
+    },
+    {
+      "q": "Accorde le participe passé : Elle a (manger) ___ une pomme.",
+      "type": "write",
+      "answers": [
+        "mangé"
+      ],
+      "e": "Avec avoir, pas d'accord si le COD est placé après le verbe.",
+      "id": "francais_31"
+    },
+    {
+      "q": "Accorde le participe passé : Ils sont (partir) ___ tôt ce matin.",
+      "type": "write",
+      "answers": [
+        "partis"
+      ],
+      "e": "Avec être, le participe s'accorde avec le sujet (ils = masculin pluriel).",
+      "id": "francais_32"
+    },
+    {
+      "q": "Accorde le participe passé : Elles se sont (laver) ___ les mains.",
+      "type": "write",
+      "answers": [
+        "lavé"
+      ],
+      "e": "COD « les mains » placé après : pas d'accord avec le pronom réfléchi ici.",
+      "id": "francais_33"
+    },
+    {
+      "q": "Accorde le participe passé : Les erreurs qu'elle a (corriger) ___ étaient nombreuses.",
+      "type": "write",
+      "answers": [
+        "corrigées"
+      ],
+      "id": "francais_34"
+    },
+    {
+      "q": "Accorde le participe passé : La maison a été (vendre) ___ la semaine dernière.",
+      "type": "write",
+      "answers": [
+        "vendue"
+      ],
+      "e": "Voix passive : le participe s'accorde avec le sujet « la maison ».",
+      "id": "francais_35"
+    },
+    {
+      "q": "Conjugue « pouvoir » au futur simple, 3e personne du singulier : Il ___ venir demain.",
+      "type": "write",
+      "answers": [
+        "pourra"
+      ],
+      "id": "francais_36"
+    },
+    {
+      "q": "Conjugue « être » au subjonctif présent, 3e personne du singulier : Il faut qu'il ___ à l'heure.",
+      "type": "write",
+      "answers": [
+        "soit"
+      ],
+      "id": "francais_37"
+    },
+    {
+      "q": "Conjugue « faire » au subjonctif présent, 1re personne du singulier : Il faut que je ___ attention.",
+      "type": "write",
+      "answers": [
+        "fasse"
+      ],
+      "id": "francais_38"
+    },
+    {
+      "q": "Conjugue « venir » au conditionnel présent, 1re personne du singulier : Je ___ si j'avais le temps.",
+      "type": "write",
+      "answers": [
+        "viendrais"
+      ],
+      "id": "francais_39"
+    },
+    {
+      "q": "Conjugue « appeler » au futur simple, 1re personne du singulier : Je t'___ (appeler) demain.",
+      "type": "write",
+      "answers": [
+        "appellerai"
+      ],
+      "id": "francais_40"
+    },
+    {
+      "q": "Conjugue « manger » à l'impératif, 2e personne du pluriel : ___ (manger) vos légumes !",
+      "type": "write",
+      "answers": [
+        "mangez"
+      ],
+      "id": "francais_41"
+    },
+    {
+      "q": "Infinitif ou participe passé : Il faut (manger) ___ équilibré.",
+      "type": "write",
+      "answers": [
+        "manger"
+      ],
+      "e": "Après « il faut », on utilise l'infinitif (on peut remplacer par « vendre »).",
+      "id": "francais_42"
+    },
+    {
+      "q": "Infinitif ou participe passé : J'ai (manger) ___ équilibré hier.",
+      "type": "write",
+      "answers": [
+        "mangé"
+      ],
+      "e": "Après l'auxiliaire avoir, on utilise le participe passé (on peut remplacer par « vendu »).",
+      "id": "francais_43"
+    },
+    {
+      "q": "Conjugue « aller » au subjonctif présent, 2e personne du singulier : Il faut que tu y ___.",
+      "type": "write",
+      "answers": [
+        "ailles"
+      ],
+      "id": "francais_44"
+    },
+    {
+      "q": "Conjugue « prendre » au passé simple, 3e personne du singulier : Il ___ son sac et partit.",
+      "type": "write",
+      "answers": [
+        "prit"
+      ],
+      "id": "francais_45"
+    },
+    {
+      "q": "Conjugue « avoir » au subjonctif présent, 1re personne du pluriel : Il faut que nous ___ de la patience.",
+      "type": "write",
+      "answers": [
+        "ayons"
+      ],
+      "id": "francais_46"
+    },
+    {
+      "q": "Conjugue « envoyer » au futur simple, 3e personne du singulier : Elle m'___ (envoyer) un message.",
+      "type": "write",
+      "answers": [
+        "enverra"
+      ],
+      "id": "francais_47"
+    },
+    {
+      "q": "Complète l'orthographe : int___essant (une ou deux « r » et combien de « s » ?)",
+      "type": "write",
+      "answers": [
+        "intéressant"
+      ],
+      "id": "francais_48"
+    },
+    {
+      "q": "Complète l'orthographe : profe___ionnel",
+      "type": "write",
+      "answers": [
+        "professionnel"
+      ],
+      "id": "francais_49"
+    },
+    {
+      "q": "Complète l'orthographe : appara___tre",
+      "type": "write",
+      "answers": [
+        "apparaître",
+        "apparaitre"
+      ],
+      "id": "francais_50"
+    },
+    {
+      "q": "Complète l'orthographe : embarra___er",
+      "type": "write",
+      "answers": [
+        "embarrasser"
+      ],
+      "id": "francais_51"
+    },
+    {
+      "q": "Complète l'orthographe : développe___ent",
+      "type": "write",
+      "answers": [
+        "développement"
+      ],
+      "id": "francais_52"
+    },
+    {
+      "q": "Complète l'orthographe : nécessa___e",
+      "type": "write",
+      "answers": [
+        "nécessaire"
+      ],
+      "id": "francais_53"
+    },
+    {
+      "q": "Complète l'orthographe : paralle___e",
+      "type": "write",
+      "answers": [
+        "parallèle"
+      ],
+      "id": "francais_54"
+    },
+    {
+      "q": "Complète l'orthographe : envir___ement",
+      "type": "write",
+      "answers": [
+        "environnement"
+      ],
+      "id": "francais_55"
+    },
+    {
+      "q": "Complète l'orthographe : personne___ement",
+      "type": "write",
+      "answers": [
+        "personnellement"
+      ],
+      "id": "francais_56"
+    },
+    {
+      "q": "Complète l'orthographe : language ou langage : lequel est correct ?",
+      "type": "write",
+      "answers": [
+        "langage"
+      ],
+      "id": "francais_57"
+    },
+    {
+      "q": "Combien de « m » dans « homme » ?",
+      "type": "write",
+      "answers": [
+        "2"
+      ],
+      "id": "francais_58"
+    },
+    {
+      "q": "Combien de « p » dans « apporter » ?",
+      "type": "write",
+      "answers": [
+        "2"
+      ],
+      "id": "francais_59"
+    },
+    {
+      "q": "Combien de « f » dans « effacer » ?",
+      "type": "write",
+      "answers": [
+        "2"
+      ],
+      "id": "francais_60"
+    },
+    {
+      "q": "Comment écrit-on le son [ill] dans « travail » au pluriel ?",
+      "type": "write",
+      "answers": [
+        "travaux"
+      ],
+      "e": "Les mots en -ail font souvent leur pluriel en -aux (travail/travaux, corail/coraux).",
+      "id": "francais_61"
+    },
+    {
+      "q": "Quel est le pluriel de « cheval » ?",
+      "type": "write",
+      "answers": [
+        "chevaux"
+      ],
+      "id": "francais_62"
+    },
+    {
+      "q": "Quel est le pluriel de « bijou » ?",
+      "type": "write",
+      "answers": [
+        "bijoux"
+      ],
+      "e": "Les sept exceptions en -ou qui prennent un x : bijou, caillou, chou, genou, hibou, joujou, pou.",
+      "id": "francais_63"
+    },
+    {
+      "q": "Quel est le pluriel de « pneu » ?",
+      "type": "write",
+      "answers": [
+        "pneus"
+      ],
+      "e": "Les mots en -eu prennent un x au pluriel, sauf bleu, pneu et landau qui prennent un s.",
+      "id": "francais_64"
+    },
+    {
+      "q": "Quel est le pluriel de « festival » ?",
+      "type": "write",
+      "answers": [
+        "festivals"
+      ],
+      "e": "Quelques mots en -al font leur pluriel en -als (bal, carnaval, festival, récital, régal).",
+      "id": "francais_65"
+    },
+    {
+      "q": "Accorde le verbe : La plupart des élèves ___ (réussir) leur examen.",
+      "type": "write",
+      "answers": [
+        "réussissent"
+      ],
+      "e": "« la plupart de » + nom pluriel : le verbe s'accorde au pluriel.",
+      "id": "francais_66"
+    },
+    {
+      "q": "Accorde le verbe : Ni Paul ni Marie ne ___ (venir) ce soir.",
+      "type": "write",
+      "answers": [
+        "vient"
+      ],
+      "e": "Avec « ni...ni », l'accord se fait souvent au singulier si les sujets s'excluent.",
+      "id": "francais_67"
+    },
+    {
+      "q": "Accorde le verbe : Chacun des candidats ___ (avoir) reçu une convocation.",
+      "type": "write",
+      "answers": [
+        "a"
+      ],
+      "e": "« chacun » est singulier : le verbe s'accorde au singulier.",
+      "id": "francais_68"
+    },
+    {
+      "q": "Accorde l'adjectif : Elle porte des chaussures (marron) ___.",
+      "type": "write",
+      "answers": [
+        "marron"
+      ],
+      "e": "« marron » est un nom employé comme adjectif de couleur : il reste invariable.",
+      "id": "francais_69"
+    },
+    {
+      "q": "Accorde l'adjectif : Il a les yeux (bleu clair) ___.",
+      "type": "write",
+      "answers": [
+        "bleu clair"
+      ],
+      "e": "Un adjectif de couleur composé reste invariable.",
+      "id": "francais_70"
+    },
+    {
+      "q": "Accorde l'adjectif : Une robe (orange) ___.",
+      "type": "write",
+      "answers": [
+        "orange"
+      ],
+      "e": "« orange » est un nom employé comme adjectif de couleur : il reste invariable.",
+      "id": "francais_71"
+    },
+    {
+      "q": "Complète : sans ___ (doute/doutes), il viendra.",
+      "type": "write",
+      "answers": [
+        "doute"
+      ],
+      "e": "« sans doute » s'écrit toujours au singulier.",
+      "id": "francais_72"
+    },
+    {
+      "q": "Complète : quel ___ (que/qui) soit son avis, nous continuerons.",
+      "type": "write",
+      "answers": [
+        "que"
+      ],
+      "e": "« quel que » (en deux mots, « quel » s'accorde) s'oppose à « quelque » (adverbe invariable).",
+      "id": "francais_73"
+    },
+    {
+      "q": "Complète : il y a ___ (quelque/quelques) temps, nous nous sommes rencontrés.",
+      "type": "write",
+      "answers": [
+        "quelques"
+      ],
+      "e": "« quelques » devant un nom pluriel est un déterminant qui s'accorde.",
+      "id": "francais_74"
+    },
+    {
+      "q": "Complète : cette voiture coûte ___ (quelque/quelques) 20 000 euros.",
+      "type": "write",
+      "answers": [
+        "quelque"
+      ],
+      "e": "« quelque » devant un nombre est un adverbe invariable signifiant « environ ».",
+      "id": "francais_75"
+    },
+    {
+      "q": "Complète : je n'ai vu personne, ___ (hormis/hormi) toi.",
+      "type": "write",
+      "answers": [
+        "hormis"
+      ],
+      "id": "francais_76"
+    },
+    {
+      "q": "Complète : parmi ___ (c'est/ses) invités, il y avait son oncle.",
+      "type": "write",
+      "answers": [
+        "ses"
+      ],
+      "id": "francais_77"
+    }
+  ]
+}

@@ -487,6 +487,20 @@
     font-size:16px;
     cursor:pointer;
   }
+  .next-btn{
+    appearance:none;
+    border:none;
+    background:var(--accent);
+    color:var(--accent-ink);
+    font-family:"Bebas Neue", sans-serif;
+    font-size:20px;
+    letter-spacing:0.04em;
+    border-radius:14px;
+    padding:14px;
+    width:100%;
+    margin-top:14px;
+    cursor:pointer;
+  }
   .write-answer{
     margin-top:10px;
     font-size:13px;
@@ -784,6 +798,7 @@
         </div>
         <div class="write-answer" id="writeAnswer" hidden></div>
         <div class="explain" id="qExplain" hidden></div>
+        <button class="next-btn" id="nextBtn" type="button" hidden>Suivant →</button>
       </div>
     </div>
   </div>
@@ -1307,6 +1322,7 @@
   var writeSubmitEl = document.getElementById("writeSubmit");
   var writeAnswerEl = document.getElementById("writeAnswer");
   var qExplainEl = document.getElementById("qExplain");
+  var nextBtnEl = document.getElementById("nextBtn");
 
   var runTimer = null, endsAt = 0, totalDuration = 180;
   var pool = [], poolIdx = 0, answered = 0, correctCount = 0, advanceTimeout = null;
@@ -1342,6 +1358,7 @@
     qExplainEl.hidden = true;
     qExplainEl.textContent = item.e;
     writeAnswerEl.hidden = true;
+    nextBtnEl.hidden = true;
 
     if(item.type === "write"){
       qOptionsEl.hidden = true;
@@ -1385,13 +1402,8 @@
     if(sessionSubjects.indexOf(item.subject) === -1) sessionSubjects.push(item.subject);
   }
 
-  function scheduleAdvance(hasExplain){
-    var delay;
-    if(currentMode === "maison"){ delay = hasExplain ? 3200 : 1800; }
-    else { delay = hasExplain ? 1900 : 1100; }
-    advanceTimeout = setTimeout(function(){
-      if(Date.now() < endsAt){ nextQuestion(); }
-    }, delay);
+  function showNextButton(){
+    nextBtnEl.hidden = false;
   }
 
   function chooseAnswer(item, idx, btnEl){
@@ -1405,7 +1417,7 @@
     if(!isCorrect){ btnEl.classList.add("wrong"); }
     recordAnswer(item, isCorrect);
     if(item.e){ qExplainEl.hidden = false; }
-    scheduleAdvance(!!item.e);
+    showNextButton();
   }
 
   function submitWrite(){
@@ -1423,12 +1435,14 @@
     }
     recordAnswer(currentItem, isCorrect);
     if(currentItem.e){ qExplainEl.hidden = false; }
-    scheduleAdvance(!!currentItem.e || !isCorrect);
+    showNextButton();
   }
   writeSubmitEl.addEventListener("click", submitWrite);
   writeInputEl.addEventListener("keydown", function(ev){
-    if(ev.key === "Enter") submitWrite();
+    if(ev.key !== "Enter") return;
+    if(locked){ nextQuestion(); } else { submitWrite(); }
   });
+  nextBtnEl.addEventListener("click", nextQuestion);
 
   function startSession(){
     ensureAudio();
