@@ -830,14 +830,14 @@
 
   // ---------- Question bank: loaded from cours/*.json ----------
   // Each subject's questions live in their own file (cours/<key>.json),
-  // listed in cours/manifest.json. Each question carries a fixed "id"
+  // listed in cours/subjects.json. Each question carries a fixed "id"
   // written in the file, so your spaced-repetition progress (stored in
   // localStorage under gymrevise_srs_v1) keeps matching the same questions
   // even as content gets added or re-ordered.
   var BANK = {};
   var loadErrorEl = document.getElementById("loadError");
   try {
-    var manifestRes = await fetch("cours/manifest.json");
+    var manifestRes = await fetch("cours/subjects.json");
     if (!manifestRes.ok) throw new Error("manifest " + manifestRes.status);
     var subjectKeys = await manifestRes.json();
     var results = await Promise.all(subjectKeys.map(function(key){
