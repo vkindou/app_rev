@@ -1,0 +1,135 @@
+{
+  "label": "RC · Digital & CRM",
+  "short": "RC Digital",
+  "items": [
+    {
+      "id": "rcdigi_0",
+      "q": "Le multicanal désigne...",
+      "o": [
+        "Un seul canal de vente",
+        "Plusieurs canaux qui fonctionnent de façon indépendante",
+        "Des canaux totalement intégrés",
+        "Une vente uniquement en magasin"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdigi_1",
+      "q": "Le cross-canal désigne...",
+      "o": [
+        "Des canaux complémentaires ponctuellement (ex : click and collect)",
+        "Un seul canal digital",
+        "Une intégration totale du parcours client",
+        "L'absence de canal physique"
+      ],
+      "a": 0
+    },
+    {
+      "id": "rcdigi_2",
+      "q": "L'omnicanal désigne...",
+      "o": [
+        "Un canal unique performant",
+        "Une intégration totale de tous les canaux avec une vision unique du client",
+        "La vente exclusivement en ligne",
+        "Un canal réservé aux professionnels"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdigi_3",
+      "q": "À quoi sert un CRM (Customer Relationship Management) ?",
+      "o": [
+        "Gérer la comptabilité",
+        "Gérer et centraliser la relation avec les clients",
+        "Gérer les stocks uniquement",
+        "Créer des fiches produits"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdigi_4",
+      "q": "Que signifie GRC ?",
+      "o": [
+        "Gestion des Ressources Commerciales",
+        "Gestion de la Relation Client",
+        "Groupe de Recherche Client",
+        "Gestion des Résultats Commerciaux"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdigi_5",
+      "q": "Un logiciel de phoning sert notamment à...",
+      "o": [
+        "Créer des factures",
+        "Automatiser les appels et gérer les campagnes de prospection téléphonique",
+        "Gérer les stocks",
+        "Concevoir des visuels publicitaires"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdigi_6",
+      "q": "Un centre de relation client (CRC) peut être...",
+      "o": [
+        "Uniquement interne",
+        "Uniquement externe",
+        "Interne ou externe (sous-traité)",
+        "Toujours gratuit"
+      ],
+      "a": 2
+    },
+    {
+      "id": "rcdigi_7",
+      "q": "Le traitement d'une base de données clients permet de...",
+      "o": [
+        "Segmenter, cibler et personnaliser la relation client",
+        "Supprimer les données inutiles uniquement",
+        "Remplacer le CRM",
+        "Fixer les prix de vente"
+      ],
+      "a": 0
+    },
+    {
+      "id": "rcdigi_8",
+      "q": "Un web-to-store désigne...",
+      "o": [
+        "Un achat en ligne livré en magasin",
+        "Une recherche en ligne suivie d'un achat en magasin",
+        "Une vente uniquement physique",
+        "Un service après-vente en ligne"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdigi_9",
+      "q": "Le ROPO (Research Online, Purchase Offline) désigne...",
+      "o": [
+        "Acheter en ligne puis retourner en magasin",
+        "Se renseigner en ligne puis acheter en magasin",
+        "Payer en ligne uniquement",
+        "Livrer uniquement à domicile"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdigi_10",
+      "q": "Un logiciel de phoning permet notamment de...",
+      "o": [
+        "Programmer des scripts d'appels et suivre les campagnes",
+        "Gérer la paie des salariés",
+        "Créer des factures clients",
+        "Fixer les objectifs annuels"
+      ],
+      "a": 0
+    },
+    {
+      "id": "rcdigi_11",
+      "q": "Quel sigle désigne la Gestion de la Relation Client ?",
+      "type": "write",
+      "answers": [
+        "grc"
+      ]
+    }
+  ]
+}

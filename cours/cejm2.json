@@ -1,0 +1,183 @@
+{
+  "label": "CEJM · Marchés",
+  "short": "CEJM Marchés",
+  "items": [
+    {
+      "id": "cejm2_0",
+      "q": "Combien de types de marché existe-t-il traditionnellement ?",
+      "o": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "a": 1,
+      "e": "Marché des biens/services, marché du travail, marché financier."
+    },
+    {
+      "id": "cejm2_1",
+      "q": "Sur le marché du travail, qui est demandeur ?",
+      "o": [
+        "Les ménages",
+        "Les entreprises",
+        "L'État seul",
+        "Les banques"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm2_2",
+      "q": "Sur le marché du travail, qui est offreur ?",
+      "o": [
+        "Les entreprises",
+        "Les banques",
+        "Les ménages (chercheurs d'emploi)",
+        "L'État"
+      ],
+      "a": 2
+    },
+    {
+      "id": "cejm2_3",
+      "q": "Sur le marché financier, qui a une capacité de financement ?",
+      "o": [
+        "Les ménages (épargnants)",
+        "Les entreprises",
+        "L'État",
+        "Les administrations"
+      ],
+      "a": 0
+    },
+    {
+      "id": "cejm2_4",
+      "q": "Sur le marché financier, qui a un besoin de financement ?",
+      "o": [
+        "Les ménages",
+        "Entreprises et État",
+        "Les banques centrales",
+        "Personne"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm2_5",
+      "q": "Le prix sur un marché résulte de...",
+      "o": [
+        "La décision de l'État",
+        "La rencontre entre l'offre et la demande",
+        "Le coût de production seul",
+        "La loi sur la concurrence"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm2_6",
+      "q": "Une barrière à l'entrée peut être...",
+      "o": [
+        "Uniquement géographique",
+        "Financière, réglementaire ou technologique",
+        "Toujours illégale",
+        "Fixée par les syndicats"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm2_7",
+      "q": "Une externalité négative est...",
+      "o": [
+        "Un bénéfice partagé",
+        "Un effet néfaste subi par un tiers sans compensation",
+        "Une aide de l'État",
+        "Une hausse de prix"
+      ],
+      "a": 1,
+      "e": "Exemple : la pollution générée par une usine."
+    },
+    {
+      "id": "cejm2_8",
+      "q": "L'asymétrie d'information désigne...",
+      "o": [
+        "Un prix trop élevé",
+        "Un agent qui en sait plus qu'un autre sur le marché",
+        "Une absence de concurrence",
+        "Un marché saturé"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm2_9",
+      "q": "Une entente sur les prix entre concurrents est...",
+      "o": [
+        "Encouragée",
+        "Interdite",
+        "Obligatoire",
+        "Sans conséquence"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm2_10",
+      "q": "Sur le marché des biens et services, les offreurs sont...",
+      "o": [
+        "Les ménages",
+        "Les entreprises",
+        "L'État uniquement",
+        "Les banques"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm2_11",
+      "q": "Sur le marché des biens et services, les demandeurs sont...",
+      "o": [
+        "Les entreprises",
+        "Les banques",
+        "Les ménages (consommateurs)",
+        "Les administrations seules"
+      ],
+      "a": 2
+    },
+    {
+      "id": "cejm2_12",
+      "q": "Une hausse de la demande sans hausse de l'offre entraîne généralement...",
+      "o": [
+        "Une baisse des prix",
+        "Une hausse des prix",
+        "Aucun effet",
+        "La disparition du marché"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm2_13",
+      "q": "Le rôle de l'ARCEP dans le marché de la téléphonie est de...",
+      "o": [
+        "Fixer les prix des forfaits",
+        "Réguler la concurrence et attribuer les licences",
+        "Vendre des abonnements",
+        "Interdire la concurrence"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm2_14",
+      "q": "Un monopole se caractérise par...",
+      "o": [
+        "De nombreux offreurs",
+        "Un seul offreur sur le marché",
+        "Aucun demandeur",
+        "Des prix toujours bas"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm2_15",
+      "q": "Comment appelle-t-on le lieu (réel ou fictif) de rencontre entre l'offre et la demande ?",
+      "type": "write",
+      "answers": [
+        "marche",
+        "le marche",
+        "un marche"
+      ]
+    }
+  ]
+}

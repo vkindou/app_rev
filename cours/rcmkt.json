@@ -1,0 +1,201 @@
+{
+  "label": "RC · Marché & Marketing",
+  "short": "RC Marketing",
+  "items": [
+    {
+      "id": "rcmkt_0",
+      "q": "Que signifie le modèle PESTEL ?",
+      "o": [
+        "Prix, Étude, Stock, Tarif, Emplacement, Livraison",
+        "Politique, Économique, Socioculturel, Technologique, Écologique, Légal",
+        "Produit, Enseigne, Stratégie, Test, Écoute, Logistique",
+        "Plan, Étape, Suivi, Test, Évaluation, Lancement"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_1",
+      "q": "Le marketing stratégique se situe sur...",
+      "o": [
+        "Le court terme",
+        "Le long terme",
+        "Une seule journée",
+        "Le très court terme uniquement"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_2",
+      "q": "Le marketing opérationnel se situe sur...",
+      "o": [
+        "Le long terme",
+        "Le court terme",
+        "10 ans",
+        "Aucun horizon défini"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_3",
+      "q": "Une analyse SWOT étudie...",
+      "o": [
+        "Forces, Faiblesses, Opportunités, Menaces",
+        "Ventes, Web, Objectifs, Taxes",
+        "Stock, Web, Organisation, Trésorerie",
+        "Segmentation, Web, Offre, Tarif"
+      ],
+      "a": 0
+    },
+    {
+      "id": "rcmkt_4",
+      "q": "Combien de P compte le mix marketing étendu ?",
+      "o": [
+        "3",
+        "4",
+        "5",
+        "7"
+      ],
+      "a": 2,
+      "e": "Product, Price, Place, Promotion, People."
+    },
+    {
+      "id": "rcmkt_5",
+      "q": "Une stratégie de prix d'écrémage consiste à...",
+      "o": [
+        "Vendre au prix le plus bas du marché",
+        "Fixer un prix élevé pour une clientèle premium",
+        "Aligner son prix sur celui du leader",
+        "Brader ses produits"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_6",
+      "q": "La largeur d'une gamme correspond à...",
+      "o": [
+        "Le nombre de références dans une ligne",
+        "Le nombre de lignes de produits",
+        "Le prix moyen des produits",
+        "La durée de vie du produit"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_7",
+      "q": "La profondeur d'une gamme correspond à...",
+      "o": [
+        "Le nombre de lignes de produits",
+        "Le nombre de références dans une ligne",
+        "Le nombre de concurrents",
+        "La taille de l'entreprise"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_8",
+      "q": "Une marque doit juridiquement être...",
+      "o": [
+        "Chère et complexe",
+        "Disponible, licite, non déceptive, non générique",
+        "Identique à celle d'un concurrent",
+        "Courte uniquement"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_9",
+      "q": "Le earned media désigne...",
+      "o": [
+        "Les publicités payantes",
+        "Le site web de l'entreprise",
+        "La communication gratuite générée par les clients (avis, réseaux sociaux)",
+        "Les panneaux publicitaires"
+      ],
+      "a": 2
+    },
+    {
+      "id": "rcmkt_10",
+      "q": "Le owned media désigne...",
+      "o": [
+        "Les supports possédés par l'entreprise (site, appli)",
+        "Les publications de journalistes",
+        "Les avis clients spontanés",
+        "La publicité télévisée"
+      ],
+      "a": 0
+    },
+    {
+      "id": "rcmkt_11",
+      "q": "Le ciblage consiste à...",
+      "o": [
+        "Étudier la concurrence",
+        "Choisir le ou les segments de marché à viser",
+        "Fixer le prix de vente",
+        "Créer le logo de la marque"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_12",
+      "q": "Le positionnement d'un produit vise à...",
+      "o": [
+        "Réduire les coûts de production",
+        "Occuper une place distincte et attractive dans l'esprit du client",
+        "Augmenter le nombre de fournisseurs",
+        "Supprimer la concurrence"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_13",
+      "q": "Une stratégie de prix de pénétration consiste à...",
+      "o": [
+        "Fixer un prix élevé dès le lancement",
+        "Fixer un prix bas pour gagner rapidement des parts de marché",
+        "Ne jamais changer de prix",
+        "Vendre uniquement en B to B"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_14",
+      "q": "La segmentation consiste à...",
+      "o": [
+        "Vendre à tout le monde de la même façon",
+        "Diviser le marché en groupes homogènes de consommateurs",
+        "Fixer un seul prix pour tous",
+        "Choisir un seul canal de vente"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_15",
+      "q": "Le cycle de vie d'un produit comporte les phases...",
+      "o": [
+        "Achat, usage, satisfaction, fidélité",
+        "Lancement, croissance, maturité, déclin",
+        "Prospection, vente, SAV",
+        "Segmentation, ciblage, positionnement"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcmkt_16",
+      "q": "Quel sigle désigne l'analyse Forces, Faiblesses, Opportunités, Menaces ?",
+      "type": "write",
+      "answers": [
+        "swot"
+      ]
+    },
+    {
+      "id": "rcmkt_17",
+      "q": "Quel terme désigne la stratégie consistant à fixer un prix élevé pour une clientèle premium ?",
+      "type": "write",
+      "answers": [
+        "ecremage",
+        "strategie d'ecremage",
+        "strategie d ecremage"
+      ]
+    }
+  ]
+}

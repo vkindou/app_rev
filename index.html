@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Répète entre les séries</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -674,6 +675,8 @@
     <small id="dateLabel">BTS NDRC</small>
   </div>
 
+  <div id="loadError" class="card" hidden style="border-color:var(--danger); color:var(--danger); font-weight:600;"></div>
+
   <!-- SETUP -->
   <div id="screenSetup">
     <div class="card streak-card">
@@ -822,171 +825,48 @@
 </div>
 
 <script>
-(function(){
+(async function(){
   "use strict";
 
-  // ---------- Question bank ----------
-  var BANK = {
-    cejm1: { label:"CEJM · Agents éco", short:"CEJM Agents", items:[
-      {q:"Combien y a-t-il d'agents économiques principaux ?", o:["3","4","5","6"], a:1, e:"Ménages, entreprises, banques, administrations publiques."},
-      {q:"Quelle est la fonction principale des ménages ?", o:["Consommer","Produire","Financer","Réglementer"], a:0, e:"Les ménages consomment des biens et services."},
-      {q:"Quelle est la fonction principale des entreprises ?", o:["Redistribuer","Produire des biens et services marchands","Épargner uniquement","Réguler le marché"], a:1},
-      {q:"Quelle est la fonction principale des banques ?", o:["Produire des services non marchands","Consommer","Financer l'économie (crédits)","Payer des impôts"], a:2},
-      {q:"Quel est le rôle des administrations publiques ?", o:["Produire des services non marchands et redistribuer","Vendre des produits avec profit","Faire des prêts aux entreprises","Employer tous les ménages"], a:0},
-      {q:"Un flux réel correspond à...", o:["Un virement bancaire","Un échange de biens, services ou travail","Le paiement d'un salaire","Un crédit accordé"], a:1},
-      {q:"Un flux monétaire correspond à...", o:["Un échange d'argent (paiement, salaire, crédit)","La livraison d'un produit","Une prestation de service","Le travail fourni par un salarié"], a:0},
-      {q:"France Travail appartient à quelle catégorie d'agent ?", o:["Entreprise","Ménage","Administration publique","Banque"], a:2},
-      {q:"Le type de production d'une administration publique est...", o:["Marchande","Non marchande","Mixte","Industrielle"], a:1},
-      {q:"Qui verse les cotisations sociales à l'URSSAF ?", o:["Les banques","Les ménages seuls","Les entreprises (employeurs)","L'État uniquement"], a:2},
-      {q:"Quel agent économique produit principalement des services non marchands financés par l'impôt ?", o:["Les banques","Les administrations publiques","Les ménages","Les entreprises"], a:1},
-      {q:"Le salaire versé par une entreprise à un salarié est un flux...", o:["Réel","Monétaire","Mixte","Aucun des deux"], a:1},
-      {q:"Un entrepreneur individuel appartient à quel agent économique ?", o:["Entreprise uniquement","Administration publique","Ménage","Banque"], a:2, e:"Au sens de la comptabilité nationale, les entrepreneurs individuels sont rattachés aux ménages."},
-      {q:"Une cotisation sociale payée par un salarié finance notamment...", o:["Les dividendes des actionnaires","La protection sociale (santé, retraite)","Le capital de l'entreprise","La publicité de l'entreprise"], a:1},
-      {q:"Le rôle premier d'une banque commerciale est de...", o:["Fixer les prix du marché","Collecter l'épargne et accorder des crédits","Produire des biens de consommation","Voter les lois économiques"], a:1},
-      {q:"Quel type de production correspond à la fourniture de biens et services à but non lucratif ?", o:["Production marchande", "Production non marchande", "Production mixte", "Production industrielle"], a:1, type:"write", answers:["production non marchande","non marchande"]},
-      {q:"Comment s'appelle l'agent économique qui consomme des biens et services pour satisfaire ses besoins ?", type:"write", answers:["menage","menages","les menages"]}
-    ]},
-    cejm2: { label:"CEJM · Marchés", short:"CEJM Marchés", items:[
-      {q:"Combien de types de marché existe-t-il traditionnellement ?", o:["2","3","4","5"], a:1, e:"Marché des biens/services, marché du travail, marché financier."},
-      {q:"Sur le marché du travail, qui est demandeur ?", o:["Les ménages","Les entreprises","L'État seul","Les banques"], a:1},
-      {q:"Sur le marché du travail, qui est offreur ?", o:["Les entreprises","Les banques","Les ménages (chercheurs d'emploi)","L'État"], a:2},
-      {q:"Sur le marché financier, qui a une capacité de financement ?", o:["Les ménages (épargnants)","Les entreprises","L'État","Les administrations"], a:0},
-      {q:"Sur le marché financier, qui a un besoin de financement ?", o:["Les ménages","Entreprises et État","Les banques centrales","Personne"], a:1},
-      {q:"Le prix sur un marché résulte de...", o:["La décision de l'État","La rencontre entre l'offre et la demande","Le coût de production seul","La loi sur la concurrence"], a:1},
-      {q:"Une barrière à l'entrée peut être...", o:["Uniquement géographique","Financière, réglementaire ou technologique","Toujours illégale","Fixée par les syndicats"], a:1},
-      {q:"Une externalité négative est...", o:["Un bénéfice partagé","Un effet néfaste subi par un tiers sans compensation","Une aide de l'État","Une hausse de prix"], a:1, e:"Exemple : la pollution générée par une usine."},
-      {q:"L'asymétrie d'information désigne...", o:["Un prix trop élevé","Un agent qui en sait plus qu'un autre sur le marché","Une absence de concurrence","Un marché saturé"], a:1},
-      {q:"Une entente sur les prix entre concurrents est...", o:["Encouragée","Interdite","Obligatoire","Sans conséquence"], a:1},
-      {q:"Sur le marché des biens et services, les offreurs sont...", o:["Les ménages","Les entreprises","L'État uniquement","Les banques"], a:1},
-      {q:"Sur le marché des biens et services, les demandeurs sont...", o:["Les entreprises","Les banques","Les ménages (consommateurs)","Les administrations seules"], a:2},
-      {q:"Une hausse de la demande sans hausse de l'offre entraîne généralement...", o:["Une baisse des prix","Une hausse des prix","Aucun effet","La disparition du marché"], a:1},
-      {q:"Le rôle de l'ARCEP dans le marché de la téléphonie est de...", o:["Fixer les prix des forfaits","Réguler la concurrence et attribuer les licences","Vendre des abonnements","Interdire la concurrence"], a:1},
-      {q:"Un monopole se caractérise par...", o:["De nombreux offreurs","Un seul offreur sur le marché","Aucun demandeur","Des prix toujours bas"], a:1},
-      {q:"Comment appelle-t-on le lieu (réel ou fictif) de rencontre entre l'offre et la demande ?", type:"write", answers:["marche","le marche","un marche"]}
-    ]},
-    rcmkt: { label:"RC · Marché & Marketing", short:"RC Marketing", items:[
-      {q:"Que signifie le modèle PESTEL ?", o:["Prix, Étude, Stock, Tarif, Emplacement, Livraison","Politique, Économique, Socioculturel, Technologique, Écologique, Légal","Produit, Enseigne, Stratégie, Test, Écoute, Logistique","Plan, Étape, Suivi, Test, Évaluation, Lancement"], a:1},
-      {q:"Le marketing stratégique se situe sur...", o:["Le court terme","Le long terme","Une seule journée","Le très court terme uniquement"], a:1},
-      {q:"Le marketing opérationnel se situe sur...", o:["Le long terme","Le court terme","10 ans","Aucun horizon défini"], a:1},
-      {q:"Une analyse SWOT étudie...", o:["Forces, Faiblesses, Opportunités, Menaces","Ventes, Web, Objectifs, Taxes","Stock, Web, Organisation, Trésorerie","Segmentation, Web, Offre, Tarif"], a:0},
-      {q:"Combien de P compte le mix marketing étendu ?", o:["3","4","5","7"], a:2, e:"Product, Price, Place, Promotion, People."},
-      {q:"Une stratégie de prix d'écrémage consiste à...", o:["Vendre au prix le plus bas du marché","Fixer un prix élevé pour une clientèle premium","Aligner son prix sur celui du leader","Brader ses produits"], a:1},
-      {q:"La largeur d'une gamme correspond à...", o:["Le nombre de références dans une ligne","Le nombre de lignes de produits","Le prix moyen des produits","La durée de vie du produit"], a:1},
-      {q:"La profondeur d'une gamme correspond à...", o:["Le nombre de lignes de produits","Le nombre de références dans une ligne","Le nombre de concurrents","La taille de l'entreprise"], a:1},
-      {q:"Une marque doit juridiquement être...", o:["Chère et complexe","Disponible, licite, non déceptive, non générique","Identique à celle d'un concurrent","Courte uniquement"], a:1},
-      {q:"Le earned media désigne...", o:["Les publicités payantes","Le site web de l'entreprise","La communication gratuite générée par les clients (avis, réseaux sociaux)","Les panneaux publicitaires"], a:2},
-      {q:"Le owned media désigne...", o:["Les supports possédés par l'entreprise (site, appli)","Les publications de journalistes","Les avis clients spontanés","La publicité télévisée"], a:0},
-      {q:"Le ciblage consiste à...", o:["Étudier la concurrence","Choisir le ou les segments de marché à viser","Fixer le prix de vente","Créer le logo de la marque"], a:1},
-      {q:"Le positionnement d'un produit vise à...", o:["Réduire les coûts de production","Occuper une place distincte et attractive dans l'esprit du client","Augmenter le nombre de fournisseurs","Supprimer la concurrence"], a:1},
-      {q:"Une stratégie de prix de pénétration consiste à...", o:["Fixer un prix élevé dès le lancement","Fixer un prix bas pour gagner rapidement des parts de marché","Ne jamais changer de prix","Vendre uniquement en B to B"], a:1},
-      {q:"La segmentation consiste à...", o:["Vendre à tout le monde de la même façon","Diviser le marché en groupes homogènes de consommateurs","Fixer un seul prix pour tous","Choisir un seul canal de vente"], a:1},
-      {q:"Le cycle de vie d'un produit comporte les phases...", o:["Achat, usage, satisfaction, fidélité","Lancement, croissance, maturité, déclin","Prospection, vente, SAV","Segmentation, ciblage, positionnement"], a:1},
-      {q:"Quel sigle désigne l'analyse Forces, Faiblesses, Opportunités, Menaces ?", type:"write", answers:["swot"]},
-      {q:"Quel terme désigne la stratégie consistant à fixer un prix élevé pour une clientèle premium ?", type:"write", answers:["ecremage","strategie d'ecremage","strategie d ecremage"]}
-    ]},
-    rcstat: { label:"RC · Statistiques", short:"RC Stats", items:[
-      {q:"La médiane est...", o:["La moyenne arithmétique","La valeur qui partage la série en deux parties égales","La valeur la plus fréquente","L'écart entre le min et le max"], a:1},
-      {q:"L'écart-type mesure...", o:["La valeur centrale d'une série","La dispersion des valeurs autour de la moyenne","Le nombre total d'observations","Le taux de croissance"], a:1},
-      {q:"Quelle est la formule du taux de croissance ?", o:["(Arrivée - Départ) / Départ x 100","Arrivée / Départ","Départ - Arrivée","(Arrivée + Départ) / 2"], a:0},
-      {q:"La méthode de Mayer sert à...", o:["Calculer un écart-type","Établir une droite d'ajustement pour prévoir les ventes","Calculer une part de marché","Segmenter la clientèle"], a:1},
-      {q:"Dans la méthode de Mayer, on divise la série en...", o:["Trois groupes","Deux groupes égaux (ou presque)","Cinq groupes","Un seul groupe"], a:1},
-      {q:"Le mode d'une série statistique est...", o:["La valeur la plus fréquente","La valeur centrale","La moyenne pondérée","L'écart-type"], a:0},
-      {q:"Un tableau statistique avec effectifs cumulés sert à...", o:["Calculer facilement la médiane et les quartiles","Remplacer la moyenne","Éviter de faire des graphiques","Calculer le taux de TVA"], a:0},
-      {q:"Si l'écart-type est faible, les valeurs de la série sont...", o:["Très dispersées","Proches de la moyenne","Toutes négatives","Impossibles à représenter"], a:1},
-      {q:"La méthode des moindres carrés sert à...", o:["Arrondir les résultats","Trouver la droite d'ajustement la plus précise possible","Calculer un pourcentage de remise","Faire un diagramme circulaire"], a:1}
-    ]},
-    rcdigi: { label:"RC · Digital & CRM", short:"RC Digital", items:[
-      {q:"Le multicanal désigne...", o:["Un seul canal de vente","Plusieurs canaux qui fonctionnent de façon indépendante","Des canaux totalement intégrés","Une vente uniquement en magasin"], a:1},
-      {q:"Le cross-canal désigne...", o:["Des canaux complémentaires ponctuellement (ex : click and collect)","Un seul canal digital","Une intégration totale du parcours client","L'absence de canal physique"], a:0},
-      {q:"L'omnicanal désigne...", o:["Un canal unique performant","Une intégration totale de tous les canaux avec une vision unique du client","La vente exclusivement en ligne","Un canal réservé aux professionnels"], a:1},
-      {q:"À quoi sert un CRM (Customer Relationship Management) ?", o:["Gérer la comptabilité","Gérer et centraliser la relation avec les clients","Gérer les stocks uniquement","Créer des fiches produits"], a:1},
-      {q:"Que signifie GRC ?", o:["Gestion des Ressources Commerciales","Gestion de la Relation Client","Groupe de Recherche Client","Gestion des Résultats Commerciaux"], a:1},
-      {q:"Un logiciel de phoning sert notamment à...", o:["Créer des factures","Automatiser les appels et gérer les campagnes de prospection téléphonique","Gérer les stocks","Concevoir des visuels publicitaires"], a:1},
-      {q:"Un centre de relation client (CRC) peut être...", o:["Uniquement interne","Uniquement externe","Interne ou externe (sous-traité)","Toujours gratuit"], a:2},
-      {q:"Le traitement d'une base de données clients permet de...", o:["Segmenter, cibler et personnaliser la relation client","Supprimer les données inutiles uniquement","Remplacer le CRM","Fixer les prix de vente"], a:0},
-      {q:"Un web-to-store désigne...", o:["Un achat en ligne livré en magasin","Une recherche en ligne suivie d'un achat en magasin","Une vente uniquement physique","Un service après-vente en ligne"], a:1},
-      {q:"Le ROPO (Research Online, Purchase Offline) désigne...", o:["Acheter en ligne puis retourner en magasin","Se renseigner en ligne puis acheter en magasin","Payer en ligne uniquement","Livrer uniquement à domicile"], a:1},
-      {q:"Un logiciel de phoning permet notamment de...", o:["Programmer des scripts d'appels et suivre les campagnes","Gérer la paie des salariés","Créer des factures clients","Fixer les objectifs annuels"], a:0},
-      {q:"Quel sigle désigne la Gestion de la Relation Client ?", type:"write", answers:["grc"]}
-    ]},
-    rcdist: { label:"RC · Distribution", short:"RC Distribution", items:[
-      {q:"Un circuit direct signifie...", o:["Le producteur vend directement au client final, sans intermédiaire","Il y a un seul intermédiaire","Il y a plusieurs intermédiaires","La vente passe par un grossiste"], a:0},
-      {q:"Un circuit court comporte...", o:["Aucun intermédiaire","Un seul intermédiaire","Plusieurs intermédiaires","Uniquement des grossistes"], a:1},
-      {q:"Un circuit long comporte...", o:["Aucun intermédiaire","Un seul intermédiaire","Plusieurs intermédiaires","Uniquement le producteur"], a:2},
-      {q:"Une franchise repose sur...", o:["Le rachat total de l'enseigne","Une marque et un savoir-faire cédés contre des redevances","Un contrat sans obligation","La gratuité totale"], a:1},
-      {q:"Une concession accorde à un distributeur...", o:["L'exclusivité de distribution sur un territoire donné","La propriété de la marque","Un statut de salarié","Aucun droit particulier"], a:0},
-      {q:"Une centrale d'achat sert à...", o:["Vendre directement aux clients finaux","Regrouper les achats de plusieurs points de vente pour négocier de meilleurs prix","Remplacer les fournisseurs","Gérer uniquement la publicité"], a:1},
-      {q:"Un réseau intégré (comme Carrefour) est composé de...", o:["Commerçants indépendants sous contrat","Points de vente appartenant à un même groupe","Franchisés uniquement","Fournisseurs externes"], a:1},
-      {q:"Un contrat de concession lie un...", o:["Franchiseur et un franchisé","Concédant et un concessionnaire","Grossiste et un détaillant","Salarié et un employeur"], a:1},
-      {q:"La distribution intensive vise à...", o:["Être présent dans un minimum de points de vente","Être présent dans un maximum de points de vente","N'avoir qu'un seul revendeur","Vendre uniquement en ligne"], a:1},
-      {q:"La distribution sélective consiste à...", o:["Vendre partout sans condition","Choisir des distributeurs selon des critères précis (image, compétence)","Interdire toute revente","Vendre uniquement à l'export"], a:1}
-    ]},
-    angverb: { label:"Anglais · Verbes irr.", short:"Anglais", items:[
-      {q:"Quel est le prétérit (passé simple) de \"go\" ?", o:["Goed","Went","Gone","Going"], a:1, e:"go / went / gone."},
-      {q:"Quel est le prétérit de \"be\" à la 1ère personne (\"I\") ?", o:["Was","Were","Been","Is"], a:0, e:"I was, you were, he/she/it was."},
-      {q:"Quel est le prétérit de \"have\" ?", o:["Haved","Has","Had","Having"], a:2, e:"have / had / had."},
-      {q:"Quel est le prétérit de \"do\" ?", o:["Did","Done","Does","Doed"], a:0, e:"do / did / done."},
-      {q:"Quel est le prétérit de \"see\" ?", o:["Seen","Saw","Sees","Seed"], a:1, e:"see / saw / seen."},
-      {q:"Quel est le prétérit de \"take\" ?", o:["Taken","Took","Takes","Taked"], a:1, e:"take / took / taken."},
-      {q:"Quel est le prétérit de \"make\" ?", o:["Maked","Made","Makes","Making"], a:1, e:"make / made / made."},
-      {q:"Quel est le prétérit de \"come\" ?", o:["Comed","Came","Come","Coming"], a:1, e:"come / came / come."},
-      {q:"Quel est le prétérit de \"give\" ?", o:["Gived","Gave","Given","Give"], a:1, e:"give / gave / given."},
-      {q:"Quel est le prétérit de \"write\" ?", o:["Writed","Wrote","Written","Writing"], a:1, e:"write / wrote / written."},
-      {q:"Quel est le prétérit de \"speak\" ?", o:["Spoken","Spoke","Speaked","Speaks"], a:1, e:"speak / spoke / spoken."},
-      {q:"Quel est le prétérit de \"eat\" ?", o:["Eaten","Ate","Eated","Eats"], a:1, e:"eat / ate / eaten."},
-      {q:"Quel est le prétérit de \"drink\" ?", o:["Drunk","Drank","Drinked","Drinking"], a:1, e:"drink / drank / drunk."},
-      {q:"Quel est le prétérit de \"know\" ?", o:["Knew","Known","Knowed","Knows"], a:0, e:"know / knew / known."},
-      {q:"Quel est le prétérit de \"think\" ?", o:["Thinked","Thought","Thinking","Thoughted"], a:1, e:"think / thought / thought."},
-      {q:"Quel est le participe passé de \"break\" ?", o:["Broke","Broken","Breaked","Breaking"], a:1, e:"break / broke / broken."},
-      {q:"Quel est le participe passé de \"choose\" ?", o:["Chose","Chosen","Choosed","Choosing"], a:1, e:"choose / chose / chosen."},
-      {q:"Quel est le prétérit de \"buy\" ?", o:["Buyed","Bought","Buy","Buying"], a:1, e:"buy / bought / bought."},
-      {q:"Quel est le prétérit de \"run\" ?", o:["Ran","Runned","Run","Running"], a:0, e:"run / ran / run."},
-      {q:"Quel est le prétérit de \"sell\" ?", o:["Selled","Sold","Sell","Selling"], a:1, e:"sell / sold / sold."},
-      {q:"Quel est le prétérit de \"find\" ?", o:["Finded","Found","Find","Finding"], a:1, e:"find / found / found."},
-      {q:"Écris le prétérit du verbe \"feel\" (ressentir).", type:"write", answers:["felt"]},
-      {q:"Écris le prétérit du verbe \"buy\" (acheter).", type:"write", answers:["bought"]}
-    ]},
-    cge: { label:"CGE · Culture générale", short:"CGE", items:[
-      {q:"La CGE vise avant tout à...", o:["Se spécialiser dans un seul domaine","Acquérir des connaissances variées pour mieux comprendre le monde, avec une expression quasi parfaite","Mémoriser des dates par cœur","Apprendre uniquement l'économie"], a:1},
-      {q:"Combien de compétences sont attendues en CGE ?", o:["3","4","5","6"], a:2, e:"Réflexion objective, connaissances, esprit critique, s'informer/se documenter, s'exprimer à l'oral et à l'écrit."},
-      {q:"Une réflexion objective repose sur...", o:["Les sentiments et les affects","La raison et le raisonnement","Mon intérêt personnel à court terme","Une opinion non justifiée"], a:1},
-      {q:"Une réflexion subjective repose sur...", o:["Des faits expliqués","Des sentiments, des affects","Des connecteurs de cause","Des conséquences à long terme pour le monde"], a:1},
-      {q:"L'horizon d'une réflexion objective prend en compte...", o:["Mon intérêt personnel immédiat uniquement","Les conséquences pour moi, autrui et le monde, à court, moyen et long terme","Le point de vue de mes amis","Aucun horizon particulier"], a:1},
-      {q:"Que doit comporter chaque argument dans une réflexion objective ?", o:["Être affirmé sans preuve","Être expliqué, illustré et justifié","Être le plus court possible","Rester une opinion personnelle"], a:1},
-      {q:"Quel connecteur logique introduit une cause ?", o:["Cependant","Parce que","Ainsi","De plus"], a:1},
-      {q:"Quel connecteur logique introduit une opposition ?", o:["Car","Toutefois","Par conséquent","En outre"], a:1},
-      {q:"Quel connecteur logique introduit une conséquence ?", o:["Puisque","Par ailleurs","Donc","Or"], a:2},
-      {q:"Quel connecteur logique introduit un ajout (addition) ?", o:["Or","De plus","Donc","Puisque"], a:1, e:"Autres connecteurs d'addition : ensuite, par ailleurs, en outre, enfin, in fine."},
-      {q:"Vers quelle date situe-t-on la naissance de l'écriture ?", o:["-3000","-1000","476","1453"], a:0},
-      {q:"En quelle année l'Empire romain d'Occident s'effondre-t-il ?", o:["-3000","476","1453","1789"], a:1},
-      {q:"En quelle année l'Empire romain d'Orient (byzantin) tombe-t-il ?", o:["476","1492","1453","1517"], a:2},
-      {q:"En quelle année Christophe Colomb découvre-t-il l'Amérique ?", o:["1453","1492","1517","1789"], a:1},
-      {q:"Quel événement marque le début de l'Époque contemporaine ?", o:["La chute de Rome","La Révolution française de 1789","La découverte de l'Amérique","La Renaissance"], a:1},
-      {q:"Quel roi meurt en 1715, à la charnière du Siècle des Lumières ?", o:["Clovis","Louis XIV","Louis XVI","Charlemagne"], a:1, e:"Le Siècle des Lumières est ensuite souvent daté jusqu'en 1789 — vérifie la datation donnée par ton prof."},
-      {q:"Quelle est l'origine du nom \"France\" : Gaulois → tribu des Francs → Clovis → ...", o:["Carolingiens","Capétiens","Mérovingiens","Valois"], a:2},
-      {q:"Pourquoi le système féodal se met-il en place au Moyen Âge ?", o:["Le roi est trop puissant","Le roi ne peut plus protéger ses sujets face aux invasions barbares","Le clergé l'exige par contrat","Les paysans le réclament"], a:1},
-      {q:"Dans la pyramide féodale, qui fait la guerre ?", o:["Le clergé","Les seigneurs","Les serfs/vilains","Les marchands"], a:1},
-      {q:"Dans la pyramide féodale, qui prie ?", o:["Les seigneurs","Le clergé","Les serfs","Le roi seul"], a:1},
-      {q:"Au Moyen Âge, quel type d'art est autorisé ?", o:["Uniquement l'art profane","Uniquement l'art sacré (religieux)","L'art abstrait","Aucun art"], a:1, e:"Couleurs dominantes sombres ; profane ≠ sacré."},
-      {q:"Dans quelle ville italienne naît la Renaissance artistique ?", o:["Rome","Venise","Florence","Milan"], a:2, e:"Chez des peintres comme De Vinci et Michel-Ange (chapelle Sixtine)."},
-      {q:"Quel courant de pensée affirme, pour la première fois, que tous les hommes sont égaux malgré leurs différences ?", o:["Le protestantisme","L'humanisme","Le féodalisme","Le positivisme"], a:1},
-      {q:"Qui initie le protestantisme en 1517 ?", o:["Léonard de Vinci","Martin Luther","Christophe Colomb","Michel-Ange"], a:1},
-      {q:"Depuis l'Amérique, les routes commerciales rapportent notamment...", o:["Le thé et les épices","La pomme de terre, la tomate et le haricot","La soie et le sucre","Le café"], a:1, e:"Thé, épices, sucre et soie viennent d'Asie ; pomme de terre, tomate, courgette et haricot viennent d'Amérique."},
-      {q:"L'aubergine provient à l'origine de...", o:["L'Amérique","L'Asie","L'Afrique","L'Europe"], a:1, e:"Contrairement à une confusion fréquente, l'aubergine vient d'Asie — c'est la courgette qui vient d'Amérique."},
-      {q:"Quelle épidémie est typique du Moyen Âge ?", o:["Le choléra","La peste","La grippe espagnole","Le typhus du XIXe siècle"], a:1, e:"Le choléra est surtout une épidémie du XIXe siècle ; la peste est celle du Moyen Âge."},
-      {q:"Écris le nom du roi franc fondateur des Mérovingiens.", type:"write", answers:["clovis"]},
-      {q:"Écris le nom du moine/théologien allemand à l'origine du protestantisme (1517).", type:"write", answers:["martin luther","luther"]}
-    ]}
-  };
+  // ---------- Question bank: loaded from cours/*.json ----------
+  // Each subject's questions live in their own file (cours/<key>.json),
+  // listed in cours/manifest.json. Each question carries a fixed "id"
+  // written in the file, so your spaced-repetition progress (stored in
+  // localStorage under gymrevise_srs_v1) keeps matching the same questions
+  // even as content gets added or re-ordered.
+  var BANK = {};
+  var loadErrorEl = document.getElementById("loadError");
+  try {
+    var manifestRes = await fetch("cours/manifest.json");
+    if (!manifestRes.ok) throw new Error("manifest " + manifestRes.status);
+    var subjectKeys = await manifestRes.json();
+    var results = await Promise.all(subjectKeys.map(function(key){
+      return fetch("cours/" + key + ".json").then(function(res){
+        if (!res.ok) throw new Error(key + " " + res.status);
+        return res.json();
+      }).then(function(data){ return {key:key, data:data}; });
+    }));
+    results.forEach(function(r){ BANK[r.key] = r.data; });
+  } catch (err) {
+    if (loadErrorEl) {
+      loadErrorEl.hidden = false;
+      loadErrorEl.textContent = "Impossible de charger les questions (cours/*.json). Vérifie ta connexion et recharge la page.";
+    }
+    return; // Nothing to run the app on; stop init here.
+  }
+  if (loadErrorEl) loadErrorEl.hidden = true;
+
 
   var order = Object.keys(BANK);
 
-  // Flatten with stable ids: subjectKey_index
+  // Flatten. Each item's own "id" (written in cours/<key>.json) is used
+  // when present so spaced-repetition progress keeps matching; falls back
+  // to the old subjectKey_index scheme only if a question has none.
   var ALL_ITEMS = [];
   var ITEM_BY_ID = {};
   order.forEach(function(key){
     BANK[key].items.forEach(function(item, idx){
-      var id = key + "_" + idx;
+      var id = item.id || (key + "_" + idx);
       var flat = {
         id:id, subjectKey:key, subject:BANK[key].short,
         type: item.type || "mcq",

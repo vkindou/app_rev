@@ -1,0 +1,105 @@
+{
+  "label": "RC · Statistiques",
+  "short": "RC Stats",
+  "items": [
+    {
+      "id": "rcstat_0",
+      "q": "La médiane est...",
+      "o": [
+        "La moyenne arithmétique",
+        "La valeur qui partage la série en deux parties égales",
+        "La valeur la plus fréquente",
+        "L'écart entre le min et le max"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcstat_1",
+      "q": "L'écart-type mesure...",
+      "o": [
+        "La valeur centrale d'une série",
+        "La dispersion des valeurs autour de la moyenne",
+        "Le nombre total d'observations",
+        "Le taux de croissance"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcstat_2",
+      "q": "Quelle est la formule du taux de croissance ?",
+      "o": [
+        "(Arrivée - Départ) / Départ x 100",
+        "Arrivée / Départ",
+        "Départ - Arrivée",
+        "(Arrivée + Départ) / 2"
+      ],
+      "a": 0
+    },
+    {
+      "id": "rcstat_3",
+      "q": "La méthode de Mayer sert à...",
+      "o": [
+        "Calculer un écart-type",
+        "Établir une droite d'ajustement pour prévoir les ventes",
+        "Calculer une part de marché",
+        "Segmenter la clientèle"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcstat_4",
+      "q": "Dans la méthode de Mayer, on divise la série en...",
+      "o": [
+        "Trois groupes",
+        "Deux groupes égaux (ou presque)",
+        "Cinq groupes",
+        "Un seul groupe"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcstat_5",
+      "q": "Le mode d'une série statistique est...",
+      "o": [
+        "La valeur la plus fréquente",
+        "La valeur centrale",
+        "La moyenne pondérée",
+        "L'écart-type"
+      ],
+      "a": 0
+    },
+    {
+      "id": "rcstat_6",
+      "q": "Un tableau statistique avec effectifs cumulés sert à...",
+      "o": [
+        "Calculer facilement la médiane et les quartiles",
+        "Remplacer la moyenne",
+        "Éviter de faire des graphiques",
+        "Calculer le taux de TVA"
+      ],
+      "a": 0
+    },
+    {
+      "id": "rcstat_7",
+      "q": "Si l'écart-type est faible, les valeurs de la série sont...",
+      "o": [
+        "Très dispersées",
+        "Proches de la moyenne",
+        "Toutes négatives",
+        "Impossibles à représenter"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcstat_8",
+      "q": "La méthode des moindres carrés sert à...",
+      "o": [
+        "Arrondir les résultats",
+        "Trouver la droite d'ajustement la plus précise possible",
+        "Calculer un pourcentage de remise",
+        "Faire un diagramme circulaire"
+      ],
+      "a": 1
+    }
+  ]
+}

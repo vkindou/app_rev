@@ -1,0 +1,116 @@
+{
+  "label": "RC · Distribution",
+  "short": "RC Distribution",
+  "items": [
+    {
+      "id": "rcdist_0",
+      "q": "Un circuit direct signifie...",
+      "o": [
+        "Le producteur vend directement au client final, sans intermédiaire",
+        "Il y a un seul intermédiaire",
+        "Il y a plusieurs intermédiaires",
+        "La vente passe par un grossiste"
+      ],
+      "a": 0
+    },
+    {
+      "id": "rcdist_1",
+      "q": "Un circuit court comporte...",
+      "o": [
+        "Aucun intermédiaire",
+        "Un seul intermédiaire",
+        "Plusieurs intermédiaires",
+        "Uniquement des grossistes"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdist_2",
+      "q": "Un circuit long comporte...",
+      "o": [
+        "Aucun intermédiaire",
+        "Un seul intermédiaire",
+        "Plusieurs intermédiaires",
+        "Uniquement le producteur"
+      ],
+      "a": 2
+    },
+    {
+      "id": "rcdist_3",
+      "q": "Une franchise repose sur...",
+      "o": [
+        "Le rachat total de l'enseigne",
+        "Une marque et un savoir-faire cédés contre des redevances",
+        "Un contrat sans obligation",
+        "La gratuité totale"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdist_4",
+      "q": "Une concession accorde à un distributeur...",
+      "o": [
+        "L'exclusivité de distribution sur un territoire donné",
+        "La propriété de la marque",
+        "Un statut de salarié",
+        "Aucun droit particulier"
+      ],
+      "a": 0
+    },
+    {
+      "id": "rcdist_5",
+      "q": "Une centrale d'achat sert à...",
+      "o": [
+        "Vendre directement aux clients finaux",
+        "Regrouper les achats de plusieurs points de vente pour négocier de meilleurs prix",
+        "Remplacer les fournisseurs",
+        "Gérer uniquement la publicité"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdist_6",
+      "q": "Un réseau intégré (comme Carrefour) est composé de...",
+      "o": [
+        "Commerçants indépendants sous contrat",
+        "Points de vente appartenant à un même groupe",
+        "Franchisés uniquement",
+        "Fournisseurs externes"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdist_7",
+      "q": "Un contrat de concession lie un...",
+      "o": [
+        "Franchiseur et un franchisé",
+        "Concédant et un concessionnaire",
+        "Grossiste et un détaillant",
+        "Salarié et un employeur"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdist_8",
+      "q": "La distribution intensive vise à...",
+      "o": [
+        "Être présent dans un minimum de points de vente",
+        "Être présent dans un maximum de points de vente",
+        "N'avoir qu'un seul revendeur",
+        "Vendre uniquement en ligne"
+      ],
+      "a": 1
+    },
+    {
+      "id": "rcdist_9",
+      "q": "La distribution sélective consiste à...",
+      "o": [
+        "Vendre partout sans condition",
+        "Choisir des distributeurs selon des critères précis (image, compétence)",
+        "Interdire toute revente",
+        "Vendre uniquement à l'export"
+      ],
+      "a": 1
+    }
+  ]
+}

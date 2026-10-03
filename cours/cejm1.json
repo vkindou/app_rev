@@ -1,0 +1,200 @@
+{
+  "label": "CEJM · Agents éco",
+  "short": "CEJM Agents",
+  "items": [
+    {
+      "id": "cejm1_0",
+      "q": "Combien y a-t-il d'agents économiques principaux ?",
+      "o": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "a": 1,
+      "e": "Ménages, entreprises, banques, administrations publiques."
+    },
+    {
+      "id": "cejm1_1",
+      "q": "Quelle est la fonction principale des ménages ?",
+      "o": [
+        "Consommer",
+        "Produire",
+        "Financer",
+        "Réglementer"
+      ],
+      "a": 0,
+      "e": "Les ménages consomment des biens et services."
+    },
+    {
+      "id": "cejm1_2",
+      "q": "Quelle est la fonction principale des entreprises ?",
+      "o": [
+        "Redistribuer",
+        "Produire des biens et services marchands",
+        "Épargner uniquement",
+        "Réguler le marché"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm1_3",
+      "q": "Quelle est la fonction principale des banques ?",
+      "o": [
+        "Produire des services non marchands",
+        "Consommer",
+        "Financer l'économie (crédits)",
+        "Payer des impôts"
+      ],
+      "a": 2
+    },
+    {
+      "id": "cejm1_4",
+      "q": "Quel est le rôle des administrations publiques ?",
+      "o": [
+        "Produire des services non marchands et redistribuer",
+        "Vendre des produits avec profit",
+        "Faire des prêts aux entreprises",
+        "Employer tous les ménages"
+      ],
+      "a": 0
+    },
+    {
+      "id": "cejm1_5",
+      "q": "Un flux réel correspond à...",
+      "o": [
+        "Un virement bancaire",
+        "Un échange de biens, services ou travail",
+        "Le paiement d'un salaire",
+        "Un crédit accordé"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm1_6",
+      "q": "Un flux monétaire correspond à...",
+      "o": [
+        "Un échange d'argent (paiement, salaire, crédit)",
+        "La livraison d'un produit",
+        "Une prestation de service",
+        "Le travail fourni par un salarié"
+      ],
+      "a": 0
+    },
+    {
+      "id": "cejm1_7",
+      "q": "France Travail appartient à quelle catégorie d'agent ?",
+      "o": [
+        "Entreprise",
+        "Ménage",
+        "Administration publique",
+        "Banque"
+      ],
+      "a": 2
+    },
+    {
+      "id": "cejm1_8",
+      "q": "Le type de production d'une administration publique est...",
+      "o": [
+        "Marchande",
+        "Non marchande",
+        "Mixte",
+        "Industrielle"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm1_9",
+      "q": "Qui verse les cotisations sociales à l'URSSAF ?",
+      "o": [
+        "Les banques",
+        "Les ménages seuls",
+        "Les entreprises (employeurs)",
+        "L'État uniquement"
+      ],
+      "a": 2
+    },
+    {
+      "id": "cejm1_10",
+      "q": "Quel agent économique produit principalement des services non marchands financés par l'impôt ?",
+      "o": [
+        "Les banques",
+        "Les administrations publiques",
+        "Les ménages",
+        "Les entreprises"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm1_11",
+      "q": "Le salaire versé par une entreprise à un salarié est un flux...",
+      "o": [
+        "Réel",
+        "Monétaire",
+        "Mixte",
+        "Aucun des deux"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm1_12",
+      "q": "Un entrepreneur individuel appartient à quel agent économique ?",
+      "o": [
+        "Entreprise uniquement",
+        "Administration publique",
+        "Ménage",
+        "Banque"
+      ],
+      "a": 2,
+      "e": "Au sens de la comptabilité nationale, les entrepreneurs individuels sont rattachés aux ménages."
+    },
+    {
+      "id": "cejm1_13",
+      "q": "Une cotisation sociale payée par un salarié finance notamment...",
+      "o": [
+        "Les dividendes des actionnaires",
+        "La protection sociale (santé, retraite)",
+        "Le capital de l'entreprise",
+        "La publicité de l'entreprise"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm1_14",
+      "q": "Le rôle premier d'une banque commerciale est de...",
+      "o": [
+        "Fixer les prix du marché",
+        "Collecter l'épargne et accorder des crédits",
+        "Produire des biens de consommation",
+        "Voter les lois économiques"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm1_15",
+      "q": "Quel type de production correspond à la fourniture de biens et services à but non lucratif ?",
+      "o": [
+        "Production marchande",
+        "Production non marchande",
+        "Production mixte",
+        "Production industrielle"
+      ],
+      "a": 1,
+      "type": "write",
+      "answers": [
+        "production non marchande",
+        "non marchande"
+      ]
+    },
+    {
+      "id": "cejm1_16",
+      "q": "Comment s'appelle l'agent économique qui consomme des biens et services pour satisfaire ses besoins ?",
+      "type": "write",
+      "answers": [
+        "menage",
+        "menages",
+        "les menages"
+      ]
+    }
+  ]
+}
