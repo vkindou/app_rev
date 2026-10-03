@@ -1,0 +1,480 @@
+{
+  "label": "CEJM · Contrats",
+  "short": "CEJM Contrats",
+  "items": [
+    {
+      "id": "cejm3_0",
+      "q": "Que désignent les pourparlers ?",
+      "o": [
+        "Le contrat déjà signé",
+        "L'ensemble des discussions, échanges et négociations précédant la conclusion du contrat",
+        "Une clause pénale",
+        "Une décision de justice"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_1",
+      "q": "Pendant les pourparlers, les parties doivent respecter...",
+      "o": [
+        "Uniquement leurs intérêts personnels",
+        "Le principe de bonne foi",
+        "Un prix fixé par la loi",
+        "Aucune obligation particulière"
+      ],
+      "a": 1,
+      "e": "La bonne foi s'applique durant toute la vie du contrat, y compris pendant les négociations précontractuelles."
+    },
+    {
+      "id": "cejm3_2",
+      "q": "La rupture des pourparlers est...",
+      "o": [
+        "Interdite",
+        "Libre, mais elle ne doit pas être brutale ou de mauvaise foi",
+        "Toujours fautive",
+        "Soumise à l'accord du juge"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_3",
+      "q": "Une rupture abusive des pourparlers engage...",
+      "o": [
+        "Aucune responsabilité",
+        "La réparation du préjudice causé",
+        "L'annulation automatique du contrat",
+        "Une amende pénale"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_4",
+      "q": "Un contrat se forme lorsque...",
+      "o": [
+        "Le prix est payé",
+        "Il y a rencontre de l'offre et de l'acceptation",
+        "Un avocat intervient",
+        "Les deux parties se rencontrent physiquement"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_5",
+      "q": "La manifestation de l'offre et de l'acceptation doit être...",
+      "o": [
+        "Équivoque",
+        "Non équivoque",
+        "Implicite obligatoirement",
+        "Rédigée par un notaire"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_6",
+      "q": "Le silence vaut-il acceptation ?",
+      "o": [
+        "Toujours",
+        "Jamais, sauf exceptions prévues par la loi, les usages ou les circonstances",
+        "Uniquement entre professionnels",
+        "Uniquement par écrit"
+      ],
+      "a": 1,
+      "e": "Article 1120 du Code civil."
+    },
+    {
+      "id": "cejm3_7",
+      "q": "Si l'offrant retire son offre avant l'expiration d'un délai raisonnable, il...",
+      "o": [
+        "N'engage jamais sa responsabilité",
+        "Engage sa responsabilité",
+        "Doit obligatoirement payer une amende",
+        "Annule automatiquement tout contrat futur"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_8",
+      "q": "Selon l'article 1128 du Code civil, combien de conditions sont nécessaires à la validité d'un contrat ?",
+      "o": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "a": 1,
+      "e": "Consentement exempt de vices, capacité de contracter, contenu licite et certain."
+    },
+    {
+      "id": "cejm3_9",
+      "q": "Les trois conditions de validité d'un contrat sont...",
+      "o": [
+        "Prix, délai, signature",
+        "Consentement non vicié, capacité de contracter, contenu licite et certain",
+        "Offre, acceptation, exécution",
+        "Bonne foi, loyauté, transparence"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_10",
+      "q": "Les trois vices du consentement sont...",
+      "o": [
+        "L'erreur, le dol et la violence",
+        "Le prix, le délai et la clause",
+        "L'offre, l'acceptation et le silence",
+        "La capacité, la représentation et la licéité"
+      ],
+      "a": 0
+    },
+    {
+      "id": "cejm3_11",
+      "q": "L'erreur, pour vicier le consentement, doit porter sur...",
+      "o": [
+        "Le prix uniquement",
+        "Les qualités essentielles du contrat, et être déterminante et excusable",
+        "La personnalité du vendeur uniquement",
+        "Le lieu de signature"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_12",
+      "q": "Le dol est...",
+      "o": [
+        "Une simple négligence",
+        "Une erreur provoquée intentionnellement par des manœuvres, mensonges ou dissimulation",
+        "Un cas de force majeure",
+        "Une clause abusive"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_13",
+      "q": "La réticence dolosive consiste à...",
+      "o": [
+        "Informer complètement son cocontractant",
+        "Dissimuler intentionnellement une information dont on sait le caractère déterminant pour l'autre partie",
+        "Négocier de bonne foi",
+        "Exécuter le contrat avec retard"
+      ],
+      "a": 1,
+      "e": "Article 1137 du Code civil."
+    },
+    {
+      "id": "cejm3_14",
+      "q": "La violence, en tant que vice du consentement, peut être exercée par...",
+      "o": [
+        "Uniquement l'une des parties au contrat",
+        "Un tiers également",
+        "Uniquement un professionnel",
+        "Uniquement l'État"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_15",
+      "q": "Les vices du consentement sont sanctionnés par...",
+      "o": [
+        "La nullité absolue",
+        "La nullité relative",
+        "Une simple amende",
+        "Rien, le contrat reste valable"
+      ],
+      "a": 1,
+      "e": "Seules les parties au contrat peuvent demander la nullité relative."
+    },
+    {
+      "id": "cejm3_16",
+      "q": "La capacité juridique est...",
+      "o": [
+        "Le montant du capital social",
+        "L'aptitude à exercer des droits et des obligations",
+        "Un diplôme obligatoire",
+        "Une clause du contrat"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_17",
+      "q": "Qui doit obligatoirement être représenté pour contracter ?",
+      "o": [
+        "Tous les majeurs",
+        "Les mineurs et certains majeurs incapables",
+        "Uniquement les personnes morales",
+        "Uniquement les salariés"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_18",
+      "q": "Les personnes morales doivent être représentées car...",
+      "o": [
+        "La loi l'exige sans raison particulière",
+        "Elles n'ont pas d'existence physique",
+        "Elles sont toujours mineures",
+        "Elles n'ont pas de capacité juridique"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_19",
+      "q": "Un acte exercé par un représentant dans la limite de ses pouvoirs engage...",
+      "o": [
+        "Le représentant seul",
+        "Le représenté",
+        "Personne",
+        "Un tiers"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_20",
+      "q": "Un acte exercé hors des pouvoirs du représentant engage la responsabilité du représentant si...",
+      "o": [
+        "Il a commis une faute ayant causé un préjudice à un tiers",
+        "Le représenté est d'accord",
+        "Le contrat est écrit",
+        "Jamais, le représenté est toujours responsable"
+      ],
+      "a": 0
+    },
+    {
+      "id": "cejm3_21",
+      "q": "Pour être valide, le contenu d'un contrat doit être...",
+      "o": [
+        "Secret et complexe",
+        "Licite et certain",
+        "Rédigé en anglais",
+        "Validé par un huissier"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_22",
+      "q": "Une prestation contractuelle doit être...",
+      "o": [
+        "Impossible à réaliser",
+        "Possible, déterminée ou déterminable",
+        "Gratuite obligatoirement",
+        "Fixée uniquement par le vendeur"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_23",
+      "q": "Un contrat dont l'objet est illicite est...",
+      "o": [
+        "Valable quand même",
+        "Nul",
+        "Simplement modifié par le juge",
+        "Automatiquement reconduit"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_24",
+      "q": "Les clauses d'un contrat sont librement négociées, à condition de ne pas...",
+      "o": [
+        "Dépasser une page",
+        "Créer un déséquilibre significatif ou priver de substance l'obligation principale du débiteur",
+        "Être rédigées en français",
+        "Contenir de chiffres"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_25",
+      "q": "La force obligatoire du contrat signifie que...",
+      "o": [
+        "Le contrat peut être annulé à tout moment par une seule partie",
+        "Le contrat fait la loi des parties et s'impose à elles",
+        "Seul le juge peut exécuter le contrat",
+        "Le contrat n'a aucune valeur juridique"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_26",
+      "q": "Un contrat peut être modifié ou révoqué...",
+      "o": [
+        "Par une seule des parties, à tout moment",
+        "Par consentement mutuel des parties, ou pour les causes prévues par la loi",
+        "Uniquement par le juge",
+        "Jamais, même par accord des parties"
+      ],
+      "a": 1,
+      "e": "Article 1193 du Code civil."
+    },
+    {
+      "id": "cejm3_27",
+      "q": "Le contrat produit en principe ses effets...",
+      "o": [
+        "Envers les tiers uniquement",
+        "Entre les parties (effet relatif envers les tiers)",
+        "Envers l'État uniquement",
+        "Envers personne"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_28",
+      "q": "En cas d'inexécution du contrat, la partie lésée peut notamment...",
+      "o": [
+        "Uniquement se taire",
+        "Refuser ou suspendre l'exécution de sa propre obligation, poursuivre l'exécution forcée, ou provoquer la résolution",
+        "Payer une amende obligatoire",
+        "Rien, le contrat est automatiquement annulé"
+      ],
+      "a": 1,
+      "e": "Article 1217 du Code civil."
+    },
+    {
+      "id": "cejm3_29",
+      "q": "L'exécution forcée consiste à...",
+      "o": [
+        "Annuler le contrat",
+        "Contraindre le contractant à exécuter son engagement si cela est possible",
+        "Payer des dommages-intérêts uniquement",
+        "Renégocier le prix"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_30",
+      "q": "Pour être reconnue, la force majeure suppose un événement...",
+      "o": [
+        "Prévisible et évitable",
+        "Imprévisible, inévitable et échappant au contrôle du débiteur",
+        "Causé volontairement par le débiteur",
+        "Simplement gênant"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_31",
+      "q": "La théorie de l'imprévision (article 1195 du Code civil) s'applique lorsque...",
+      "o": [
+        "Le contrat est illicite",
+        "Un changement de circonstances imprévisible rend l'exécution excessivement onéreuse pour une partie qui n'avait pas accepté d'en assumer le risque",
+        "Une partie est mineure",
+        "Le prix a été mal calculé dès le départ"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_32",
+      "q": "En cas d'imprévision, la partie qui demande une renégociation doit, pendant celle-ci...",
+      "o": [
+        "Cesser immédiatement d'exécuter ses obligations",
+        "Continuer à exécuter ses obligations",
+        "Résilier le contrat",
+        "Attendre la décision du juge sans rien faire"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_33",
+      "q": "En cas d'échec de la renégociation pour imprévision, à défaut d'accord dans un délai raisonnable, le juge peut...",
+      "o": [
+        "Rien faire",
+        "Réviser le contrat ou y mettre fin, à la date et aux conditions qu'il fixe",
+        "Emprisonner une des parties",
+        "Doubler automatiquement le prix"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_34",
+      "q": "Selon l'article 1367 du Code civil, la signature électronique doit...",
+      "o": [
+        "Être manuscrite obligatoirement",
+        "Résulter d'un procédé fiable d'identification garantissant le lien avec l'acte",
+        "Être interdite pour les contrats commerciaux",
+        "Nécessiter un notaire"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_35",
+      "q": "Les conditions générales de vente (CGV) doivent être communiquées par un professionnel...",
+      "o": [
+        "À tout le monde systématiquement",
+        "À un acheteur professionnel qui en fait la demande",
+        "Uniquement sur demande d'un juge",
+        "Jamais"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_36",
+      "q": "Dans la situation professionnelle d'introduction du chapitre, quel reproche la SNCF Gares et Connexions adresse-t-elle à l'entreprise Masci ?",
+      "o": [
+        "Un retard de paiement",
+        "Des manquements à ses obligations contractuelles (pollution au plomb) sur le chantier de la gare d'Austerlitz",
+        "Une rupture abusive de pourparlers",
+        "Un dol lors de la signature"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_37",
+      "q": "Dans l'affaire Buffalo Grill contre Indian River, pourquoi la Cour de cassation réduit-elle le montant de l'indemnité contractuelle ?",
+      "o": [
+        "Parce que le contrat était nul",
+        "Parce que le juge peut modérer une indemnité manifestement excessive au regard du préjudice réellement subi",
+        "Parce que Buffalo Grill a renoncé à sa demande",
+        "Parce que la clause pénale était illégale"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_38",
+      "q": "Dans l'affaire Chronopost, pourquoi la clause limitant la responsabilité au seul montant du transport n'a-t-elle pas été retenue ?",
+      "o": [
+        "Parce qu'elle n'était pas écrite",
+        "Parce qu'elle était contradictoire avec l'engagement principal de livrer dans un délai précis, rompant l'équilibre contractuel",
+        "Parce que Chronopost avait changé d'avis",
+        "Parce que le client était mineur"
+      ],
+      "a": 1
+    },
+    {
+      "id": "cejm3_39",
+      "q": "Quel est le terme juridique désignant l'ensemble des discussions précédant la conclusion d'un contrat ?",
+      "type": "write",
+      "answers": [
+        "pourparlers",
+        "les pourparlers"
+      ]
+    },
+    {
+      "id": "cejm3_40",
+      "q": "Quel principe les parties doivent-elles respecter pendant toute la vie du contrat, y compris les négociations précontractuelles ?",
+      "type": "write",
+      "answers": [
+        "bonne foi",
+        "la bonne foi",
+        "le principe de bonne foi"
+      ]
+    },
+    {
+      "id": "cejm3_41",
+      "q": "Comment appelle-t-on la nullité qui sanctionne les vices du consentement ?",
+      "type": "write",
+      "answers": [
+        "nullite relative",
+        "la nullite relative"
+      ]
+    },
+    {
+      "id": "cejm3_42",
+      "q": "Quel article du Code civil consacre la théorie de l'imprévision ?",
+      "type": "write",
+      "answers": [
+        "1195",
+        "article 1195",
+        "l'article 1195"
+      ]
+    }
+  ]
+}
